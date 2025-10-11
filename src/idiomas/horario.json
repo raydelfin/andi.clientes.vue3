@@ -1,0 +1,1442 @@
+[
+    {
+        "idRen": 1,
+        "hora": "00:00",
+        "fechaIni": "00:00",
+        "fechaFin": "00:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 2,
+        "hora": "00:10",
+        "fechaIni": "00:10",
+        "fechaFin": "00:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 3,
+        "hora": "00:20",
+        "fechaIni": "00:20",
+        "fechaFin": "00:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 4,
+        "hora": "00:30",
+        "fechaIni": "00:30",
+        "fechaFin": "00:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 5,
+        "hora": "00:40",
+        "fechaIni": "00:40",
+        "fechaFin": "00:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 6,
+        "hora": "00:50",
+        "fechaIni": "00:50",
+        "fechaFin": "01:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 7,
+        "hora": "01:00",
+        "fechaIni": "01:00",
+        "fechaFin": "01:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 8,
+        "hora": "01:10",
+        "fechaIni": "01:10",
+        "fechaFin": "01:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 9,
+        "hora": "01:20",
+        "fechaIni": "01:20",
+        "fechaFin": "01:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 10,
+        "hora": "01:30",
+        "fechaIni": "01:30",
+        "fechaFin": "01:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 11,
+        "hora": "01:40",
+        "fechaIni": "01:40",
+        "fechaFin": "01:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 12,
+        "hora": "01:50",
+        "fechaIni": "01:50",
+        "fechaFin": "02:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 13,
+        "hora": "02:00",
+        "fechaIni": "02:00",
+        "fechaFin": "02:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 14,
+        "hora": "02:10",
+        "fechaIni": "02:10",
+        "fechaFin": "02:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 15,
+        "hora": "02:20",
+        "fechaIni": "02:20",
+        "fechaFin": "02:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 16,
+        "hora": "02:30",
+        "fechaIni": "02:30",
+        "fechaFin": "02:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 17,
+        "hora": "02:40",
+        "fechaIni": "02:40",
+        "fechaFin": "02:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 18,
+        "hora": "02:50",
+        "fechaIni": "02:50",
+        "fechaFin": "03:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 19,
+        "hora": "03:00",
+        "fechaIni": "03:00",
+        "fechaFin": "03:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 20,
+        "hora": "03:10",
+        "fechaIni": "03:10",
+        "fechaFin": "03:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 21,
+        "hora": "03:20",
+        "fechaIni": "03:20",
+        "fechaFin": "03:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 22,
+        "hora": "03:30",
+        "fechaIni": "03:30",
+        "fechaFin": "03:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 23,
+        "hora": "03:40",
+        "fechaIni": "03:40",
+        "fechaFin": "03:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 24,
+        "hora": "03:50",
+        "fechaIni": "03:50",
+        "fechaFin": "04:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 25,
+        "hora": "04:00",
+        "fechaIni": "04:00",
+        "fechaFin": "04:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 26,
+        "hora": "04:10",
+        "fechaIni": "04:10",
+        "fechaFin": "04:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 27,
+        "hora": "04:20",
+        "fechaIni": "04:20",
+        "fechaFin": "04:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 28,
+        "hora": "04:30",
+        "fechaIni": "04:30",
+        "fechaFin": "04:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 29,
+        "hora": "04:40",
+        "fechaIni": "04:40",
+        "fechaFin": "04:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 30,
+        "hora": "04:50",
+        "fechaIni": "04:50",
+        "fechaFin": "05:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 31,
+        "hora": "05:00",
+        "fechaIni": "05:00",
+        "fechaFin": "05:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 32,
+        "hora": "05:10",
+        "fechaIni": "05:10",
+        "fechaFin": "05:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 33,
+        "hora": "05:20",
+        "fechaIni": "05:20",
+        "fechaFin": "05:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 34,
+        "hora": "05:30",
+        "fechaIni": "05:30",
+        "fechaFin": "05:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 35,
+        "hora": "05:40",
+        "fechaIni": "05:40",
+        "fechaFin": "05:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 36,
+        "hora": "05:50",
+        "fechaIni": "05:50",
+        "fechaFin": "06:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 37,
+        "hora": "06:00",
+        "fechaIni": "06:00",
+        "fechaFin": "06:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 38,
+        "hora": "06:10",
+        "fechaIni": "06:10",
+        "fechaFin": "06:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 39,
+        "hora": "06:20",
+        "fechaIni": "06:20",
+        "fechaFin": "06:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 40,
+        "hora": "06:30",
+        "fechaIni": "06:30",
+        "fechaFin": "06:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 41,
+        "hora": "06:40",
+        "fechaIni": "06:40",
+        "fechaFin": "06:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 42,
+        "hora": "06:50",
+        "fechaIni": "06:50",
+        "fechaFin": "07:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 43,
+        "hora": "07:00",
+        "fechaIni": "07:00",
+        "fechaFin": "07:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 44,
+        "hora": "07:10",
+        "fechaIni": "07:10",
+        "fechaFin": "07:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 45,
+        "hora": "07:20",
+        "fechaIni": "07:20",
+        "fechaFin": "07:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 46,
+        "hora": "07:30",
+        "fechaIni": "07:30",
+        "fechaFin": "07:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 47,
+        "hora": "07:40",
+        "fechaIni": "07:40",
+        "fechaFin": "07:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 48,
+        "hora": "07:50",
+        "fechaIni": "07:50",
+        "fechaFin": "08:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 49,
+        "hora": "08:00",
+        "fechaIni": "08:00",
+        "fechaFin": "08:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 50,
+        "hora": "08:10",
+        "fechaIni": "08:10",
+        "fechaFin": "08:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 51,
+        "hora": "08:20",
+        "fechaIni": "08:20",
+        "fechaFin": "08:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 52,
+        "hora": "08:30",
+        "fechaIni": "08:30",
+        "fechaFin": "08:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 53,
+        "hora": "08:40",
+        "fechaIni": "08:40",
+        "fechaFin": "08:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 54,
+        "hora": "08:50",
+        "fechaIni": "08:50",
+        "fechaFin": "09:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 55,
+        "hora": "09:00",
+        "fechaIni": "09:00",
+        "fechaFin": "09:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 56,
+        "hora": "09:10",
+        "fechaIni": "09:10",
+        "fechaFin": "09:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 57,
+        "hora": "09:20",
+        "fechaIni": "09:20",
+        "fechaFin": "09:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 58,
+        "hora": "09:30",
+        "fechaIni": "09:30",
+        "fechaFin": "09:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 59,
+        "hora": "09:40",
+        "fechaIni": "09:40",
+        "fechaFin": "09:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 60,
+        "hora": "09:50",
+        "fechaIni": "09:50",
+        "fechaFin": "10:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 61,
+        "hora": "10:00",
+        "fechaIni": "10:00",
+        "fechaFin": "10:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 62,
+        "hora": "10:10",
+        "fechaIni": "10:10",
+        "fechaFin": "10:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 63,
+        "hora": "10:20",
+        "fechaIni": "10:20",
+        "fechaFin": "10:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 64,
+        "hora": "10:30",
+        "fechaIni": "10:30",
+        "fechaFin": "10:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 65,
+        "hora": "10:40",
+        "fechaIni": "10:40",
+        "fechaFin": "10:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 66,
+        "hora": "10:50",
+        "fechaIni": "10:50",
+        "fechaFin": "11:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 67,
+        "hora": "11:00",
+        "fechaIni": "11:00",
+        "fechaFin": "11:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 68,
+        "hora": "11:10",
+        "fechaIni": "11:10",
+        "fechaFin": "11:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 69,
+        "hora": "11:20",
+        "fechaIni": "11:20",
+        "fechaFin": "11:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 70,
+        "hora": "11:30",
+        "fechaIni": "11:30",
+        "fechaFin": "11:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 71,
+        "hora": "11:40",
+        "fechaIni": "11:40",
+        "fechaFin": "11:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 72,
+        "hora": "11:50",
+        "fechaIni": "11:50",
+        "fechaFin": "12:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 73,
+        "hora": "12:00",
+        "fechaIni": "12:00",
+        "fechaFin": "12:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 74,
+        "hora": "12:10",
+        "fechaIni": "12:10",
+        "fechaFin": "12:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 75,
+        "hora": "12:20",
+        "fechaIni": "12:20",
+        "fechaFin": "12:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 76,
+        "hora": "12:30",
+        "fechaIni": "12:30",
+        "fechaFin": "12:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 77,
+        "hora": "12:40",
+        "fechaIni": "12:40",
+        "fechaFin": "12:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 78,
+        "hora": "12:50",
+        "fechaIni": "12:50",
+        "fechaFin": "13:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 79,
+        "hora": "13:00",
+        "fechaIni": "13:00",
+        "fechaFin": "13:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 80,
+        "hora": "13:10",
+        "fechaIni": "13:10",
+        "fechaFin": "13:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 81,
+        "hora": "13:20",
+        "fechaIni": "13:20",
+        "fechaFin": "13:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 82,
+        "hora": "13:30",
+        "fechaIni": "13:30",
+        "fechaFin": "13:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 83,
+        "hora": "13:40",
+        "fechaIni": "13:40",
+        "fechaFin": "13:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 84,
+        "hora": "13:50",
+        "fechaIni": "13:50",
+        "fechaFin": "14:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 85,
+        "hora": "14:00",
+        "fechaIni": "14:00",
+        "fechaFin": "14:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 86,
+        "hora": "14:10",
+        "fechaIni": "14:10",
+        "fechaFin": "14:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 87,
+        "hora": "14:20",
+        "fechaIni": "14:20",
+        "fechaFin": "14:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 88,
+        "hora": "14:30",
+        "fechaIni": "14:30",
+        "fechaFin": "14:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 89,
+        "hora": "14:40",
+        "fechaIni": "14:40",
+        "fechaFin": "14:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 90,
+        "hora": "14:50",
+        "fechaIni": "14:50",
+        "fechaFin": "15:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 91,
+        "hora": "15:00",
+        "fechaIni": "15:00",
+        "fechaFin": "15:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 92,
+        "hora": "15:10",
+        "fechaIni": "15:10",
+        "fechaFin": "15:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 93,
+        "hora": "15:20",
+        "fechaIni": "15:20",
+        "fechaFin": "15:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 94,
+        "hora": "15:30",
+        "fechaIni": "15:30",
+        "fechaFin": "15:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 95,
+        "hora": "15:40",
+        "fechaIni": "15:40",
+        "fechaFin": "15:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 96,
+        "hora": "15:50",
+        "fechaIni": "15:50",
+        "fechaFin": "16:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 97,
+        "hora": "16:00",
+        "fechaIni": "16:00",
+        "fechaFin": "16:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 98,
+        "hora": "16:10",
+        "fechaIni": "16:10",
+        "fechaFin": "16:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 99,
+        "hora": "16:20",
+        "fechaIni": "16:20",
+        "fechaFin": "16:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 100,
+        "hora": "16:30",
+        "fechaIni": "16:30",
+        "fechaFin": "16:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 101,
+        "hora": "16:40",
+        "fechaIni": "16:40",
+        "fechaFin": "16:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 102,
+        "hora": "16:50",
+        "fechaIni": "16:50",
+        "fechaFin": "17:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 103,
+        "hora": "17:00",
+        "fechaIni": "17:00",
+        "fechaFin": "17:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 104,
+        "hora": "17:10",
+        "fechaIni": "17:10",
+        "fechaFin": "17:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 105,
+        "hora": "17:20",
+        "fechaIni": "17:20",
+        "fechaFin": "17:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 106,
+        "hora": "17:30",
+        "fechaIni": "17:30",
+        "fechaFin": "17:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 107,
+        "hora": "17:40",
+        "fechaIni": "17:40",
+        "fechaFin": "17:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 108,
+        "hora": "17:50",
+        "fechaIni": "17:50",
+        "fechaFin": "18:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 109,
+        "hora": "18:00",
+        "fechaIni": "18:00",
+        "fechaFin": "18:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 110,
+        "hora": "18:10",
+        "fechaIni": "18:10",
+        "fechaFin": "18:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 111,
+        "hora": "18:20",
+        "fechaIni": "18:20",
+        "fechaFin": "18:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 112,
+        "hora": "18:30",
+        "fechaIni": "18:30",
+        "fechaFin": "18:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 113,
+        "hora": "18:40",
+        "fechaIni": "18:40",
+        "fechaFin": "18:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 114,
+        "hora": "18:50",
+        "fechaIni": "18:50",
+        "fechaFin": "19:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 115,
+        "hora": "19:00",
+        "fechaIni": "19:00",
+        "fechaFin": "19:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 116,
+        "hora": "19:10",
+        "fechaIni": "19:10",
+        "fechaFin": "19:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 117,
+        "hora": "19:20",
+        "fechaIni": "19:20",
+        "fechaFin": "19:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 118,
+        "hora": "19:30",
+        "fechaIni": "19:30",
+        "fechaFin": "19:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 119,
+        "hora": "19:40",
+        "fechaIni": "19:40",
+        "fechaFin": "19:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 120,
+        "hora": "19:50",
+        "fechaIni": "19:50",
+        "fechaFin": "20:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 121,
+        "hora": "20:00",
+        "fechaIni": "20:00",
+        "fechaFin": "20:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 122,
+        "hora": "20:10",
+        "fechaIni": "20:10",
+        "fechaFin": "20:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 123,
+        "hora": "20:20",
+        "fechaIni": "20:20",
+        "fechaFin": "20:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 124,
+        "hora": "20:30",
+        "fechaIni": "20:30",
+        "fechaFin": "20:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 125,
+        "hora": "20:40",
+        "fechaIni": "20:40",
+        "fechaFin": "20:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 126,
+        "hora": "20:50",
+        "fechaIni": "20:50",
+        "fechaFin": "21:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 127,
+        "hora": "21:00",
+        "fechaIni": "21:00",
+        "fechaFin": "21:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 128,
+        "hora": "21:10",
+        "fechaIni": "21:10",
+        "fechaFin": "21:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 129,
+        "hora": "21:20",
+        "fechaIni": "21:20",
+        "fechaFin": "21:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 130,
+        "hora": "21:30",
+        "fechaIni": "21:30",
+        "fechaFin": "21:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 131,
+        "hora": "21:40",
+        "fechaIni": "21:40",
+        "fechaFin": "21:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 132,
+        "hora": "21:50",
+        "fechaIni": "21:50",
+        "fechaFin": "22:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 133,
+        "hora": "22:00",
+        "fechaIni": "22:00",
+        "fechaFin": "22:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 134,
+        "hora": "22:10",
+        "fechaIni": "22:10",
+        "fechaFin": "22:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 135,
+        "hora": "22:20",
+        "fechaIni": "22:20",
+        "fechaFin": "22:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 136,
+        "hora": "22:30",
+        "fechaIni": "22:30",
+        "fechaFin": "22:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 137,
+        "hora": "22:40",
+        "fechaIni": "22:40",
+        "fechaFin": "22:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 138,
+        "hora": "22:50",
+        "fechaIni": "22:50",
+        "fechaFin": "23:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 139,
+        "hora": "23:00",
+        "fechaIni": "23:00",
+        "fechaFin": "23:10",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 140,
+        "hora": "23:10",
+        "fechaIni": "23:10",
+        "fechaFin": "23:20",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 141,
+        "hora": "23:20",
+        "fechaIni": "23:20",
+        "fechaFin": "23:30",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 142,
+        "hora": "23:30",
+        "fechaIni": "23:30",
+        "fechaFin": "23:40",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 143,
+        "hora": "23:40",
+        "fechaIni": "23:40",
+        "fechaFin": "23:50",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    },
+    {
+        "idRen": 144,
+        "hora": "23:50",
+        "fechaIni": "23:50",
+        "fechaFin": "00:00",
+        "minutos": 10,
+        "notas": "-",
+        "color": "",
+        "colorBootstrap": ""
+    }
+]
