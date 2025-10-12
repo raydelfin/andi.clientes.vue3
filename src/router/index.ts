@@ -27,33 +27,15 @@ const router = createRouter({
 
 // 🚀 APLICAR LA VERIFICACIÓN DE AUTENTICACIÓN GLOBALMENTE
 router.beforeEach((to) => {
-  // console.log('localStorage.getItem(usuario) ---')
-  // console.log(localStorage.getItem('usuario'))
   let usuario = localStorage.getItem('usuario')
   if (usuario === null || usuario === '' || usuario === 'null') {
     usuario = ''
   }
-  console.log('router.beforeEach((to) => { ---')
-  console.log('usuario ---')
-  console.log(usuario)
-  // 1. Define las rutas públicas (donde NO se necesita login)
-  const rutasPublicas = ['/login'] // Asegúrate de incluir solo la ruta de login
-  // 2. Verifica si el usuario quiere acceder a una página restringida
-  //    Y si NO está logueado
+  const rutasPublicas = ['/login']
   if (!rutasPublicas.includes(to.path) && (usuario === '')) {
-    console.log('USUARIO NO AUTENTICADO. Redirigiendo a /login')
     return { path: '/login', replace: true }
-    // 3. Retorna la ruta de destino (Login)
-    /*
-    return { 
-      path: '/login',
-      replace: true // Reemplaza la entrada en el historial
-    }
-    */
   } else {
-    console.log('USUARIO AUTENTICADO. Redirigiendo a /buscar')
   }
-  // 4. Si está logueado o si es una ruta pública, continúa
   return true
 })
 

@@ -18,6 +18,9 @@
     "lint": "run-s lint:*"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.1.0",
+    "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@fortawesome/vue-fontawesome": "^3.1.2",
     "@ionic/vue": "^8.7.6",
     "@ionic/vue-router": "^8.7.6",
     "axios": "^1.12.2",

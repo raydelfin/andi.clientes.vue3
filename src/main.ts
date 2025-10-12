@@ -4,6 +4,7 @@ import { createPinia } from 'pinia'
 import { createI18n } from 'vue-i18n'
 import './style.scss'
 import funcionesGlobales from './composables/useFuncionesGlobales'
+import AppHeader from './components/AppHeader.vue'
 import App from './App.vue'
 import router from './router'
 
@@ -43,10 +44,12 @@ app.use(createPinia())
 app.use(router)
 app.use(i18n)
 
+app.component('AppHeader', AppHeader)
+
 // 🚨 INYECCIÓN GLOBAL: Aquí se hace la inyección.
 app.config.globalProperties.$globalFunc = funcionesGlobales
-//app.config.globalProperties.$api = 'https://localhost:44314/api'; // develop
-app.config.globalProperties.$api = 'https://api.andi.services/api'; // Producción
+//app.config.globalProperties.$api = 'https://localhost:44314/api' // develop
+app.config.globalProperties.$api = 'https://api.andi.services/api' // Producción
 
 router.isReady().then(() => {
   app.mount('#app');
