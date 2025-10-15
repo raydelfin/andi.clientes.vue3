@@ -62,8 +62,10 @@
     "hora": "Hora",
     "andiCliente": "ANDI Cliente",
     "sinImagen": "Sin imagen",
-    "km": "Kilometros",
-    "mi": "Millas",
+    "kilometros": "Kilometros",
+    "km": "km",
+    "millas": "Millas",
+    "mi": "mi",
     "efectivo": "Efectivo",
     "tarjetaCredito": "Tarjeta de Crédito",
     "tarjetaDebito": "Tarjeta de Débito",
@@ -344,10 +346,11 @@
     "cuentaANDIEliminada": "Tu cuenta ANDI fue Eliminada exitosamente"
   },
   "menuClientes": {
-    "btnMenu": "ANDI.Servicios",
+    "tituloMenu": "ANDI Servicios",
     "paraMi": "Para mi",
+    "login": "Login",
     "buscar": "Buscar",
-    "favoritos": "Favoritas",
+    "favoritos": "Favoritos",
     "agenda": "Agenda / Historial",
     "miPerfil": "Mi Perfil",
     "direcciones": "Direcciones",
@@ -359,7 +362,8 @@
     "notifInternas": "Notificaciones",
     "sinNotif": "No existen notificaciones activas",
     "preguntaCerrarSesion": "¿Deseas cerrar sesión?",
-    "siQuieroCerrarSesion": "Si, quiero cerrar sesión"
+    "siQuieroCerrarSesion": "Si, quiero cerrar sesión",
+    "idioma": "Idioma"
   },
   "miPerfil": {
     "miPerfil": "Mi Perfil",
@@ -389,7 +393,8 @@
     "revisarCorreoCodigo2": ", te enviamos el código de verificación",
     "revisarCorreoCodigo3": "Nota: también revisa en correos no deseados",
     "continuarEliminacion": "Continuar con Eliminación",
-    "eliminarMiCuenta": "Eliminar mi cuenta ANDI"
+    "eliminarMiCuenta": "Eliminar mi cuenta ANDI",
+    "escribeFrase": "Escribe la frase"
   },
   "registroCliente": {
     "paso": "Paso",

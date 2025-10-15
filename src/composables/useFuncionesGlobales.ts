@@ -14,7 +14,7 @@ const funcionesGlobales = {
   },
   verificarConexionInternetReal: async () => {
     try {
-      let response = await fetch('/api/get', {
+      const response = await fetch('/api/get', {
         method: 'GET',
         cache: 'no-cache',
         mode: 'cors' // Aunque el modo cors no es tan crítico con un proxy, es buena práctica mantenerlo

@@ -1,81 +1,91 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Login</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content :fullscreen="true" class="ion-padding">
-      <div class="centrar-login">
-        <br>
-        <!-- Logo ANDI --> 
-        <center>
-          <ion-img
-            alt=""
-            src="/img/Logo ANDI 500.png"
-            style="width: 120px; height: 120px;"
-          ></ion-img>
-        </center>
-        <i class="fas fa-search big-icon"></i>
-        <br>
-        <ion-list>
-          <!-- Tipo Login --> 
-          <ion-item>
-            <ion-select
-              :label="t('login.loginPor')"
-              v-model="tipoLoginSelec"
-              @ionChange="cambioTipoLogin()"
-              aria-label="Food"
-              placeholder="Select fruit" >
-              <ion-select-option v-for="login in lstTipoLogin"
-                :key="login.nombre" :value="login">
-                {{ login.nombre }}
-              </ion-select-option>
-            </ion-select>
-          </ion-item>
-          <!-- Usuario ANDI -->
-          <ion-item>
-            <ion-input
-              v-model.trim="credenciales.usuario"
-              :label="t('login.usuario')"
-              label-placement="stacked"
-              :clear-on-edit="true"
-              maxlength="30"
-              :placeholder="t('login.ingresaUsuario')" >
-            </ion-input>
-          </ion-item>
-          <!-- Contraseña -->
-          <ion-item>
-            <ion-input
-              type="password"
-              v-model="credenciales.password"
-              @keyup.enter="validarLogin()"
-              :label="t('login.pass')"
-              label-placement="stacked"
-              :clear-on-edit="true"
-              maxlength="30"
-              :placeholder="t('login.ingresaContraseña')" >
-            </ion-input>
-          </ion-item>
-        </ion-list>
-        <!-- Botón Ingresar -->
-        <ion-button @click="validarLogin()" size="small" style="width: 100%;">
-          {{ t('login.ingresar') }}
-        </ion-button>
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
-    </ion-content>
+    <ion-page>
+      <!-- <AppHeader :title="t('menuClientes.login')" /> -->
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title>{{ t('menuClientes.login') }}</ion-title>
+        </ion-toolbar>
+      </ion-header> 
+      <ion-content :fullscreen="true" class="ion-padding">
+        <div class="centrar-login">
+          <br>
+          <!-- Logo ANDI --> 
+          <center>
+            <ion-img
+              alt=""
+              src="/img/Logo ANDI 500.png"
+              style="width: 120px; height: 120px;"
+            ></ion-img>
+          </center>
+          <!-- <i class="fas fa-search big-icon"></i> -->
+          <br>
+          <ion-list>
+            <!-- Tipo Login --> 
+            <ion-item>
+              <ion-select
+                :label="t('login.loginPor')"
+                v-model="tipoLoginSelec"
+                @ionChange="cambioTipoLogin()"
+                fill="outline" >
+                <ion-select-option v-for="login in lstTipoLogin"
+                  :key="login.nombre" :value="login">
+                  {{ login.nombre }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <!-- Usuario ANDI -->
+            <ion-item>
+              <ion-input
+                v-model.trim="credenciales.usuario"
+                :label="t('login.usuario')"
+                label-placement="stacked"
+                :clear-on-edit="true"
+                maxlength="30"
+                :placeholder="t('login.ingresaUsuario')"
+                fill="outline" >
+              </ion-input>
+            </ion-item>
+            <!-- Contraseña -->
+            <ion-item>
+              <ion-input
+                type="password"
+                v-model="credenciales.password"
+                @keyup.enter="validarLogin()"
+                :label="t('login.pass')"
+                label-placement="stacked"
+                :clear-on-edit="true"
+                maxlength="30"
+                :placeholder="t('login.ingresaContraseña')"
+                fill="outline" >
+                <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+              </ion-input>
+            </ion-item>
+          </ion-list>
+          <br>
+          <!-- Botón Ingresar -->
+          <ion-button @click="validarLogin()" size="small" style="width: 100%;">
+            {{ t('login.ingresar') }}
+          </ion-button>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-content>
+    </ion-page>
   </ion-page>
 
   <!-- OVERLAY CON SPINNER -->
   <div v-if="mostrarOverlaySpinner" class="overlay">
     <div class="overlay-content">
-      <ion-spinner name="crescent" style="width: 3rem; height: 3rem;" color="primary"></ion-spinner>
+      <ion-spinner color="secondary" name="lines"
+        style="width: 3rem; height: 3rem;"></ion-spinner>
       <p class="mt-3">{{ txtOverlaySpinner }}</p>
     </div>
   </div>
@@ -91,32 +101,31 @@
   import { useI18n } from 'vue-i18n'
   import axios from 'axios'
   import { useRouter } from 'vue-router'
-
-  const { t, locale } = useI18n()
-
+  import { isAuthenticatedRef, updateAuthStatus } from '../stores/authStore'
+    
   // VARIABLES --------------------------------------------------------------------------------
-  // ***********************
+  // **********************************************
+  const { t, locale } = useI18n()
   const app = getCurrentInstance();
   const $globalFunc = app?.appContext.config.globalProperties.$globalFunc
   const $api = app?.appContext.config.globalProperties.$api as string
   const router = useRouter()
-  // // ***********************
+  // // **********************************************
   const status = ref('otraCuenta')
   const lstTipoLogin = ref<Array<{ valor: number, nombre: string }>>([])
   const tipoLoginSelec = ref({ valor: 1, nombre: '' })
   const paisSelec = ref(null)
   const lstPaises = ref([
-    { valor: 1, descripcion: '+52' },
-    { valor: 2, descripcion: '+1' }
-    // Agrega más países aquí si es necesario
+    { valor: 1, nombre: '+52' },
+    { valor: 2, nombre: '+1' }
   ])
   const isModalEliminarCuentaOpen = ref(false)
   const credenciales = ref({
-        usuario: '',
-        correo: '',
-        cel: '',
-        password: ''
-      })
+    usuario: '',
+    correo: '',
+    cel: '',
+    password: ''
+  })
   const mostrarOverlaySpinner = ref(false)
   const txtOverlaySpinner = ref('')
   const checkInternet = ref(false)
@@ -135,13 +144,10 @@
     if (usuario === null || usuario === '' || usuario === 'null') {
       usuario = ''
       localStorage.setItem('usuario', '')
-    }
-    // Validar Credenciales de Usuario Logueado
-    if (usuario !== '') {
-      // valUsuario.value = true
-      mostrarOverlaySpinner.value = true
-      txtOverlaySpinner.value = t('login.valCredenciales')
-      router.push('/buscar/')
+      updateAuthStatus(false)
+    } else {
+      updateAuthStatus(true)
+      router.replace('/app/Buscar')
     }
   })
   const listaLogin = () => {
@@ -272,7 +278,7 @@
   }
   const checarLogin = async () => {
     console.log('checarLogin() ---')
-    var tipoLogin = ''
+    let tipoLogin = ''
     if (status.value === 'otraCuenta') {
       if (tipoLoginSelec.value.valor === 1) tipoLogin = credenciales.value.usuario
       if (tipoLoginSelec.value.valor === 2) tipoLogin = credenciales.value.correo
@@ -283,7 +289,7 @@
       if (tipoLoginSelec.value.valor === 2) tipoLogin = credenciales.value.correo
       if (tipoLoginSelec.value.valor === 3) tipoLogin = paisSelec.value.descripcion + credenciales.value.cel
     }
-    var obj = {
+    const obj = {
       usuario: encodeURIComponent(tipoLogin),
       contraseña: encodeURIComponent(credenciales.value.password),
       tipoLogin: tipoLoginSelec.value.valor
@@ -355,7 +361,9 @@
               }
               localStorage.setItem('tipoLogin', tipo)
               localStorage.setItem('valorLogin', valor)
-              router.push('/Buscar')
+              updateAuthStatus(true)
+              router.replace('/app/Buscar')
+              mostrarOverlaySpinner.value = false
             },
             (error) => {
               console.log('Error 1')
@@ -367,9 +375,6 @@
         } else {
           mostrarOverlaySpinner.value = false
           console.log('Error 2')
-        }
-        if (lat.value === 0 && lon.value == 0) {
-          // dismissCountDown.value = dismissSecs
         }
       }
     } catch (err) {
@@ -393,6 +398,6 @@
       longitud: lon.value
     }))
   }
-  // ===========================================================================
-  // ===========================================================================
+    // ===========================================================================
+    // ===========================================================================
 </script>

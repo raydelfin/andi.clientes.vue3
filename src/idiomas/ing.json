@@ -343,8 +343,9 @@
     "cuentaANDIEliminada": "Your ANDI account was successfully deleted."
   },
   "menuClientes": {
-    "btnMenu": "ANDI.Services",
+    "tituloMenu": "ANDI Services",
     "paraMi": "For me",
+    "login": "Login",
     "buscar": "Search",
     "favoritos": "Favorites",
     "agenda": "Scheduler",
@@ -358,7 +359,8 @@
     "notifInternas": "Notifications",
     "sinNotif": "There are no active notifications",
     "preguntaCerrarSesion": "Do you want to log out?",
-    "siQuieroCerrarSesion": "Yes, I want to log out"
+    "siQuieroCerrarSesion": "Yes, I want to log out",
+    "idioma": "Language"
   },
   "miPerfil": {
     "miPerfil": "My profile",
@@ -388,7 +390,8 @@
     "revisarCorreoCodigo2": ", we sent you the verification code.",
     "revisarCorreoCodigo3": "Note: also check your spam folder",
     "continuarEliminacion": "Continue with Deletion",
-    "eliminarMiCuenta": "Delete my ANDI account"
+    "eliminarMiCuenta": "Delete my ANDI account",
+    "escribeFrase": "Write the sentence"
   },
   "registroCliente": {
     "paso": "Step",

@@ -1,3 +1,49 @@
+
+/* --- TEMA LIGHT (VALORES POR DEFECTO EN :root) --- */
+:root {
+  /* Fondo general */
+  --ion-background-color: #ffffff;
+  --ion-background-color-rgb: 255,255,255;
+  
+  /* Texto general */
+  --ion-text-color: #000000;
+  --ion-text-color-rgb: 0,0,0;
+  
+  /* Color principal (Primary) de Ionic */
+  --ion-color-primary: #3880ff;
+  /* ... Otras variables de color de Ionic ... */
+}
+
+/* --- TEMA DARK (APLICADO AL BODY CON LA CLASE 'dark') --- */
+body.dark {
+  /** background **/
+  --ion-background-color: #343a40;
+  --ion-background-color-rgb: 18,18,18;
+
+  /** text **/
+  --ion-text-color: #ffffff;
+  --ion-text-color-rgb: 255,255,255;
+
+  /* Color principal (Primary) de Ionic en modo oscuro */
+  --ion-color-primary: #4c8aff;
+  
+  [aria-checked=true].sc-ion-alert-md .alert-radio-label.sc-ion-alert-md {
+    color: var(--ion-color-step-850, var(--ion-text-color-step-150, #eeeeee));
+  }
+  .alert-radio-label.sc-ion-alert-md {
+    -webkit-padding-start: 52px;
+    padding-inline-start: 52px;
+    -webkit-padding-end: 26px;
+    padding-inline-end: 26px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    -ms-flex: 1;
+    flex: 1;
+    color: var(--ion-color-step-850, var(--ion-text-color-step-150, #919191));
+    font-size: 1rem;
+  }
+}
+
 .img-thumb-gallery{
   width: auto;
   height: auto;
@@ -81,3 +127,59 @@
   opacity: 0;
 }
 /* // Estilos necesarios para el modal ------------------------------------ */
+/* Estilos para Select Idiomas ------------------------------------ */
+.language-select {
+  --padding-start: 0;
+  --padding-end: 8px;
+  width: auto; /* Ajusta el ancho al contenido */
+  min-width: 80px; /* Ancho mínimo para que se vea la selección */
+}
+/* Estilos para el contenido de las opciones dentro del popover */
+.select-option-content {
+  display: flex;
+  align-items: center;
+}
+/* Estilos de los iconos de bandera */
+.flag-icon {
+  width: 20px;
+  height: auto;
+  margin-right: 10px;
+  border: 1px solid #ccc; /* Borde sutil */
+}
+/* // Estilos para Select Idiomas ------------------------------------ */
+.banderita {
+  width: 32px;
+  height: auto;
+  margin-right: 10px;
+  margin-top: 2px;
+}
+.input-fill-outline.sc-ion-input-md-h {
+  --border-color: var(--ion-color-step-300, var(--ion-background-color-step-300, #b3b3b3));
+  --border-radius: 4px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  min-height: 56px;
+  margin-top: 16px;
+}
+.select-fill-outline {
+  --border-color: var(--ion-color-step-300, var(--ion-background-color-step-300, #b3b3b3));
+  --border-radius: 4px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  min-height: 56px;
+  margin-top: 8px;
+}
+.list-md {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background: var(--ion-item-background, var(--ion-background-color, #fff));
+}
+.ion-button::part(native) {
+  text-transform: none;
+}

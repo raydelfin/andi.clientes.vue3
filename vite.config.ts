@@ -4,10 +4,18 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
+const isIonic = (tag: string) => tag.startsWith('ion-')
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    vue(/*{
+      template: {
+        compilerOptions: {
+          isCustomElement: isIonic
+        }
+      }
+    }*/),
     vueDevTools(),
   ],
   resolve: {

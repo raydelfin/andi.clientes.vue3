@@ -1,27 +1,11 @@
 <template>
   <ion-page>
-     <AppHeader title="Mi Página de Productos" />
-    <ion-header>
-      <ion-toolbar>
-        <ion-buttons>
-          <ion-menu-button>
-            <ion-buttons>
-              <ion-menu-button></ion-menu-button>
-            </ion-buttons>
-            <i class="fas fa-search big-icon"></i>
-            <ion-button @click="modalCerrarSesion()" size="small" style="width: 100%;">
-              Salir
-            </ion-button>
-          </ion-menu-button>
-        </ion-buttons>
-        <ion-title>BUSCAR</ion-title>
-      </ion-toolbar>
-    </ion-header>
+    <AppHeader :title="t('menuClientes.buscar')" />
     <ion-content :fullscreen="true" class="ion-padding">
       <div class="centrar-login">
         <br>
         <!-- Botón Ingresar -->
-        <ion-button @click="modalCerrarSesion()" size="small" style="width: 100%;">
+        <ion-button size="small" style="width: 100%;">
           {{ t('menuClientes.cerrarSesion') }}
         </ion-button>
         <ion-grid>
@@ -34,40 +18,6 @@
     </ion-content>
   </ion-page>
 
-  <!-- MODAL CERRAR SESIÓN -->
-  <ion-modal ref="modal" :is-open="isModalOpen">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>{{ $t('menuClientes.cerrarSesion') }}</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">
-      <p>{{ $t('menuClientes.preguntaCerrarSesion') }}</p>
-      <ion-checkbox
-        v-model="toggleButton"
-        label-placement="end" >
-        {{ $t('menuClientes.siQuieroCerrarSesion') }}
-      </ion-checkbox>
-      <ion-grid class="ion-margin-top">
-        <ion-row class="ion-justify-content-end">
-          <ion-col size="auto">
-            <ion-button color="danger" @click="cerrarModalCerrarSesion">
-              {{ $t('global.no') }}
-            </ion-button>
-          </ion-col>
-          <ion-col size="auto">
-            <ion-button
-              color="primary"
-              :disabled='!toggleButton'
-              @click="cerrarSesion" >
-              {{ $t('global.si') }}
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-content>
-  </ion-modal>
-
 </template>
 <script setup lang="ts">
   import { ref, onMounted } from 'vue'
@@ -75,7 +25,7 @@
     IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, 
     IonItem, IonLabel, IonInput, IonSelect, IonSelectOption, IonButton, IonSpinner, 
     IonModal, IonToggle, IonFab, IonFabButton, IonIcon, IonButtons, IonCheckbox, 
-    IonMenu, IonMenuButton
+    IonMenu, IonMenuButton, IonSplitPane
   } from '@ionic/vue'
   import { getCurrentInstance } from 'vue'
   import { useI18n } from 'vue-i18n'
@@ -120,8 +70,10 @@
   // FUNCIONES LOCALES
   // Lógica de mounted()
   onMounted(() => {
+    localStorage.setItem('interfaz', 'Buscar')
     listaLogin()
-    console.log('buscar.vue ---')
+    mostrarOverlaySpinner.value = false
+    console.log('Buscar.vue ---')
   })
   const listaLogin = () => {
     // 💡 PARA ACTUALIZAR UN ref(), USA .value
@@ -160,7 +112,7 @@
     isModalEliminarCuentaOpen.value = true
   }
   const validarLogin = async () => {
-    var error = 0
+    let error = 0
     mostrarOverlaySpinner.value = true
     txtOverlaySpinner.value = t('login.valCredenciales')
     // Validar Internet
@@ -259,8 +211,8 @@
     }
   }
   const checarLogin = async () => {
-    var self = this
-    var tipoLogin = ''
+    const self = this
+    let tipoLogin = ''
     ubicacion.value = null
     if (status.value === 'otraCuenta') {
       if (tipoLoginSelec.value.valor === 1) tipoLogin = credenciales.value.usuario
@@ -272,7 +224,7 @@
       if (tipoLoginSelec.value.valor === 2) tipoLogin = credenciales.value.correo
       if (tipoLoginSelec.value.valor === 3) tipoLogin = paisSelec.value.descripcion + credenciales.value.cel
     }
-    var obj = {
+    const obj = {
       usuario: encodeURIComponent(tipoLogin),
       contraseña: encodeURIComponent(credenciales.value.password),
       tipoLogin: tipoLoginSelec.value.valor
@@ -296,7 +248,7 @@
               // console.log(position)
               ubicacion.value.latitude = position.coords.latitude
               ubicacion.value.longitude = position.coords.longitude
-              console.log('ubicacion: ' + ubicacion)
+              console.log('ubicacion: ' + ubicacion.value)
               guardarUbicacion()
               // console.log('Login Cliente ---')
               // console.log(response.data)
@@ -356,7 +308,7 @@
           mostrarOverlaySpinner.value = false
           console.log('Error 2')
         }
-        if (ubicacion === null) {
+        if (ubicacion.value === null) {
           // dismissCountDown.value = dismissSecs
         }
       }
