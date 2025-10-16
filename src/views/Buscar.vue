@@ -1,6 +1,13 @@
 <template>
   <ion-page>
-    <AppHeader :title="t('menuClientes.buscar')" />
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons>
+          <ion-menu-button></ion-menu-button>
+          <ion-title>{{ t('menuClientes.buscar') }}</ion-title>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
     <ion-content :fullscreen="true" class="ion-padding">
       <div class="centrar-login">
         <br>

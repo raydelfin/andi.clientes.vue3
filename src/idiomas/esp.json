@@ -390,11 +390,15 @@
     "ingresarCodigoCorreo": "Ingresar el Código enviado a tu Correo Electrónico",
     "codigoCorreoIncorrecto": "El código es Incorrecto",
     "revisarCorreoCodigo1": "Revisa tu correo ",
-    "revisarCorreoCodigo2": ", te enviamos el código de verificación",
+    "revisarCorreoCodigo2": "Te enviamos el código de verificación a tu Correo Electrónico",
     "revisarCorreoCodigo3": "Nota: también revisa en correos no deseados",
     "continuarEliminacion": "Continuar con Eliminación",
     "eliminarMiCuenta": "Eliminar mi cuenta ANDI",
-    "escribeFrase": "Escribe la frase"
+    "escribeFrase": "Escribe la frase",
+    "valMetodosPago": "Selecciona un Método de Pago",
+    "valdivisasAceptadas": "Selecciona una Divisa",
+    "codigoEnviado": "Código Enviado",
+    "cuentaBorradaExitosamente": "Cuenta ANDI borrada exitosamente"
   },
   "registroCliente": {
     "paso": "Paso",

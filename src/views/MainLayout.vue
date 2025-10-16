@@ -1,85 +1,85 @@
 <template>
-  <ion-page>
-    <ion-split-pane content-id="main-content" when="md">
-      <ion-menu content-id="main-content" type="overlay">
-        <ion-header>
-          <ion-toolbar>
-            <ion-title>{{ t('menuClientes.tituloMenu') }}</ion-title>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content>
-          <ion-list id="inbox-list">
-            <template v-if="esAutenticado">
-              <!-- BUSCAR -->
-              <ion-menu-toggle auto-hide="false">
-                <ion-item @click="btnBuscar()" lines="none" button>
-                  <ion-icon :icon="search"></ion-icon>
-                  &nbsp; <ion-label>{{ t('menuClientes.buscar') }}</ion-label>
-                </ion-item>
-              </ion-menu-toggle>
-              <!-- FAVORITOS -->
-              <ion-menu-toggle auto-hide="false">
-                <ion-item @click="btnFavoritos()" lines="none" button>
-                  <ion-icon :icon="heart"></ion-icon>
-                  &nbsp; <ion-label>{{ $t('menuClientes.favoritos') }}</ion-label>
-                </ion-item>
-              </ion-menu-toggle>
-              <!-- MI PERFIL -->
-              <ion-menu-toggle auto-hide="false">
-                <ion-item @click="btnMiPerfil()" lines="none" button>
-                  <ion-icon :icon="personSharp"></ion-icon>
-                  &nbsp; <ion-label>{{ $t('menuClientes.miPerfil') }}</ion-label>
-                </ion-item>
-              </ion-menu-toggle>
-            </template>
-            <!-- TEMA DARK Y LIGHT -->
-            <ion-item lines="none">
-              <ion-icon :icon="colorPalette"></ion-icon>
-              &nbsp;
-              <ion-label>{{ t('menuClientes.themeDark') }}</ion-label>
-              <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-              <ion-toggle :checked="isDark"
-                @ionChange="toggleDarkTheme(!isDark)" />
-            </ion-item>
-            <!-- IDIOMAS -->
-            <ion-item lines="full">
-              <ion-img :src="paisSelec.bandera" class="banderita" />
-              <ion-select 
-                :label="t('menuClientes.idioma')"
-                interface="popover"
-                :value="paisSelec.valor"
-                @ionChange="cambioIdioma($event.detail.value)"
-                class="language-select"
-                aria-label="Seleccionar Idioma" >
-                <ion-img
-                  :src="paisSelec.bandera"
-                  style="width: 20px; height: auto; margin-right: 10px; margin-top: 2px;"
-                ></ion-img>
-                <ion-select-option 
-                  v-for="idioma in lstPaises" 
-                  :key="idioma.valor" 
-                  :value="idioma.valor" >
-                  <ion-img :src="idioma.bandera" />
-                  <span>{{ idioma.nombre }}</span>
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
-            <template v-if="esAutenticado">
-              <!-- CERRAR SESIÓN -->
-              <ion-menu-toggle auto-hide="false">
-                <ion-item @click="modalCerrarSesion()" lines="none" button>
-                  <ion-icon :icon="logOut"></ion-icon>
-                  &nbsp; <ion-label>{{ $t('menuClientes.cerrarSesion') }}</ion-label>
-                </ion-item>
-              </ion-menu-toggle>
-            </template>
-          </ion-list>
-        </ion-content>
-      </ion-menu>
-      <!-- RUTEADOR -->
-      <ion-router-outlet id="main-content" class="ion-page"></ion-router-outlet>
-    </ion-split-pane>
-  </ion-page>
+  <ion-split-pane content-id="main-content" when="md">
+    <ion-menu content-id="main-content" type="overlay">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ t('menuClientes.tituloMenu') }}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list id="inbox-list">
+          <template v-if="esAutenticado">
+            <!-- BUSCAR -->
+            <ion-menu-toggle auto-hide="false">
+              <ion-item @click="btnBuscar()" lines="none" button>
+                <ion-icon :icon="search"></ion-icon>
+                &nbsp; <ion-label>{{ t('menuClientes.buscar') }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+            <!-- FAVORITOS -->
+            <ion-menu-toggle auto-hide="false">
+              <ion-item @click="btnFavoritos()" lines="none" button>
+                <ion-icon :icon="heart"></ion-icon>
+                &nbsp; <ion-label>{{ $t('menuClientes.favoritos') }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+            <!-- MI PERFIL -->
+            <ion-menu-toggle auto-hide="false">
+              <ion-item @click="btnMiPerfil()" lines="none" button>
+                <ion-icon :icon="personSharp"></ion-icon>
+                &nbsp; <ion-label>{{ $t('menuClientes.miPerfil') }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </template>
+          <!-- TEMA DARK Y LIGHT -->
+          <ion-item lines="none">
+            <ion-icon :icon="colorPalette"></ion-icon>
+            &nbsp;
+            <ion-label>{{ t('menuClientes.themeDark') }}</ion-label>
+            <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
+            <ion-toggle :checked="isDark"
+              @ionChange="toggleDarkTheme(!isDark)" />
+          </ion-item>
+          <!-- IDIOMAS -->
+          <ion-item lines="full">
+            <ion-img :src="paisSelec.bandera" class="banderita" />
+            <ion-select 
+              :label="t('menuClientes.idioma')"
+              interface="popover"
+              :value="paisSelec.valor"
+              @ionChange="cambioIdioma($event.detail.value)"
+              class="language-select"
+              aria-label="Seleccionar Idioma" >
+              <ion-img
+                :src="paisSelec.bandera"
+                style="width: 20px; height: auto; margin-right: 10px; margin-top: 2px;"
+              ></ion-img>
+              <ion-select-option 
+                v-for="idioma in lstPaises" 
+                :key="idioma.valor" 
+                :value="idioma.valor" >
+                <ion-img :src="idioma.bandera" />
+                <span>{{ idioma.nombre }}</span>
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <template v-if="esAutenticado">
+            <!-- CERRAR SESIÓN -->
+            <ion-menu-toggle auto-hide="false">
+              <ion-item @click="modalCerrarSesion()" lines="none" button>
+                <ion-icon :icon="logOut"></ion-icon>
+                &nbsp; <ion-label>{{ $t('menuClientes.cerrarSesion') }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </template>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <!-- RUTEADOR -->
+    <div id="main-content" class="ion-page">
+      <router-view /> 
+    </div>
+  </ion-split-pane>
 
   <!-- MODAL CERRAR SESIÓN -->
   <ion-modal ref="modal" :is-open="isModalOpen">
@@ -118,17 +118,14 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  registerIonPage?: (page: any, router: any) => void
-}>()
 import { ref, onMounted, computed  } from 'vue'
 import { getCurrentInstance } from 'vue'
 import { 
-    IonApp, IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, 
+    IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, 
     IonCol, IonItem, IonLabel, IonInput, IonSelect, IonSelectOption, IonButton, 
     IonSpinner, IonModal, IonToggle, IonFab, IonFabButton, IonIcon, IonButtons, 
     IonCheckbox, IonMenu, IonMenuToggle, IonMenuButton, IonSplitPane, IonList,
-    IonRouterOutlet, IonImg
+    IonImg
 } from '@ionic/vue'
 import { search, heart, logOut, languageOutline, colorPalette, personSharp  } from 'ionicons/icons'
 import { useRoute, useRouter } from 'vue-router'
@@ -234,6 +231,5 @@ import { useI18n } from 'vue-i18n'
     isModalOpen.value = false
     updateAuthStatus(false)
     router.replace('/app/Login')
-    location.reload()
   }
 </script>

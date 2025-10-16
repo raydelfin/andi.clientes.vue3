@@ -1,7 +1,15 @@
 <template>
   <ion-page>
-    <AppHeader :title="t('menuClientes.miPerfil')" />
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons>
+          <ion-menu-button></ion-menu-button>
+          <ion-title>{{ t('menuClientes.miPerfil') }}</ion-title>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
     <ion-content :fullscreen="true" class="ion-padding">
+      <!-- AVATAR Y DATOS CLIENTE -->
       <ion-grid>
         <ion-row>
           <ion-col style="max-width: 135px;">
@@ -39,202 +47,171 @@
       </ion-grid>
       <hr>
       <!-- BOTONES CATALOGO -->
-      {{ $t('global.editar') }}
       <template v-if="estatus === 'EDITAR'">
         <ion-button color="success" @click="validarPreferencias()">
           <i class="fas fa-save big-icon"></i> &nbsp;
-          {{ $t('global.guardar') }} </ion-button>
+          {{ t('global.guardar') }} </ion-button>
         <ion-button color="secondary" @click="descartar()">
           <i class="fas fa-ban big-icon"></i> &nbsp;
-          {{ $t('global.descartar') }} </ion-button>
+          {{ t('global.descartar') }} </ion-button>
       </template>
       <template v-if="estatus === 'CONSULTA'">
         <ion-button color="primary" @click="editar()">
           <i class="fas fa-edit big-icon"></i> &nbsp;
-          {{ $t('global.editar') }} </ion-button>
+          {{ t('global.editar') }} </ion-button>
       </template>
-      <ion-grid>
-        <ion-row cols="1" cols-sm="2" cols-md="2" cols-lg="2">
-          <!-- FORMATO FECHA -->
-          <ion-col>
-            <ion-list>
+      <ion-list>
+        <!-- FORMATO FECHA -->
+        <ion-item>
+          <ion-select
+            :label="t('miPerfil.formatoFecha')"
+            label-placement="stacked"
+            v-model="formatoFechaSelec"
+            :disabled=esConsulta
+            fill="outline" >
+            <ion-select-option v-for="formato in lstFormatoFecha"
+              :key="formato.nombre" :value="formato">
+              {{ formato.nombre }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <!-- FORMATO HORA -->
+        <ion-item>
+          <ion-select
+            :label="t('miPerfil.formatoHora')"
+            label-placement="stacked"
+            v-model="formatoHoraSelec"
+            @ionChange="cambioTipoLogin()"
+            :disabled=esConsulta
+            fill="outline" >
+            <ion-select-option v-for="formato in lstFormatoHora"
+              :key="formato.nombre" :value="formato">
+              {{ formato.nombre }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <!-- ZONA HORARIA -->
+        <ion-item>
+          <ion-select
+            :label="t('miPerfil.zonaHoraria')"
+            label-placement="stacked"
+            v-model="zonaHorariaSelec"
+            :disabled=esConsulta
+            fill="outline" >
+            <ion-select-option v-for="zona in lstZonaHoraria"
+              :key="zona.zonaHoraria" :value="zona">
+              {{ zona.zonaHoraria }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <!-- MÉTODOS DE PAGO -->
+        <ion-item>
+          <ion-select
+            :label="t('miPerfil.metodosPago')"
+            label-placement="stacked"
+            v-model="metodosPagoSelec"
+            @ionChange="cambioTipoLogin()"
+            :disabled=esConsulta
+            fill="outline" >
+            <ion-select-option v-for="pago in lstMetodosPago"
+              :key="pago.nombre" :value="pago">
+              {{ pago.nombre }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <!-- DIVISAS ACEPTADAS -->
+        <ion-item>
+          <ion-select
+            :label="t('miPerfil.divisasAceptadas')"
+            label-placement="stacked"
+            v-model="divisaSelec"
+            @ionChange="cambioTipoLogin()"
+            :disabled=esConsulta
+            fill="outline" >
+            <ion-select-option v-for="divisas in lstDivisas"
+              :key="divisas.nombreLargo" :value="divisas">
+              {{ divisas.nombreLargo }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <!-- DISTANCIA EN -->
+        <ion-item>
+            <ion-select
+              :label="t('miPerfil.distanciaEn')"
+              label-placement="stacked"
+              v-model="distanciaEnSelec"
+              :disabled=esConsulta
+              @ionChange="cambioDistancia()"
+              fill="outline" >
+              <ion-select-option v-for="distancia in lstDistanciaEn"
+                :key="distancia.nombre" :value="distancia">
+                {{ distancia.nombre }}
+              </ion-select-option>
+            </ion-select>
+        </ion-item>
+      </ion-list>
+      <!--
+      <ion-row>
+        <! -- DISTANCIA -- >
+        <ion-col>
+          <ion-list>
+            <div v-if="distanciaEnSelec.medida === 'km'">
+              <ion-label :disabled="esConsulta">
+                {{ t('global.kilometros') }} = {{ cantidadDistancia }}
+              </ion-label>
               <ion-item>
-                <ion-select
-                  :label="t('miPerfil.formatoFecha')"
-                  label-placement="stacked"
-                  v-model="formatoFechaSelec"
-                  :disabled=esConsulta
-                  fill="outline" >
-                  <ion-select-option v-for="formato in lstFormatoFecha"
-                    :key="formato.nombre" :value="formato">
-                    {{ formato.nombre }}
-                  </ion-select-option>
-                </ion-select>
+                <ion-range
+                  :min="distanciaKmMin"
+                  :max="distanciaKmMax"
+                  :step="1"
+                  :value="cantidadDistancia"
+                  @ionChange="e => cantidadDistancia = e.detail.value"
+                  :disabled="esConsulta"
+                  pin="true" >
+                  <ion-label slot="start">{{ distanciaKmMin }}</ion-label>
+                  <ion-label slot="end">{{ distanciaKmMax }}</ion-label>
+                </ion-range>
               </ion-item>
-            </ion-list>
-          </ion-col>
-          <!-- FORMATO HORA -->
-          <ion-col>
-            <ion-list>
+            </div>
+            <div v-if="distanciaEnSelec.medida === 'mi'">
+              <ion-label :disabled="esConsulta">
+                {{ t('global.millas') }} = {{ cantidadDistancia }}
+              </ion-label>
               <ion-item>
-                <ion-select
-                  :label="t('miPerfil.formatoHora')"
-                  label-placement="stacked"
-                  v-model="formatoHoraSelec"
-                  @ionChange="cambioTipoLogin()"
-                  :disabled=esConsulta
-                  fill="outline" >
-                  <ion-select-option v-for="formato in lstFormatoHora"
-                    :key="formato.nombre" :value="formato">
-                    {{ formato.nombre }}
-                  </ion-select-option>
-                </ion-select>
+                <ion-range
+                  :min="distanciaMiMin"
+                  :max="distanciaMiMax"
+                  :step="1"
+                  :value="cantidadDistancia"
+                  @ionChange="e => cantidadDistancia = e.detail.value"
+                  :disabled="esConsulta"
+                  pin="true" >
+                  <ion-label slot="start">{{ distanciaMiMin }}</ion-label>
+                  <ion-label slot="end">{{ distanciaMiMax }}</ion-label>
+                </ion-range>
               </ion-item>
-            </ion-list>
-          </ion-col>
-        </ion-row>
-        <ion-row cols="1" cols-sm="2" cols-md="2" cols-lg="2">
-          <!-- ZONA HORARIA -->
-          <ion-col>
-            <ion-list>
-              <ion-item>
-                <ion-select
-                  :label="t('miPerfil.zonaHoraria')"
-                  label-placement="stacked"
-                  v-model="zonaHorariaSelec"
-                  :disabled=esConsulta
-                  fill="outline" >
-                  <ion-select-option v-for="zona in lstZonaHoraria"
-                    :key="zona.zonaHoraria" :value="zona">
-                    {{ zona.zonaHoraria }}
-                  </ion-select-option>
-                </ion-select>
-              </ion-item>
-            </ion-list>
-          </ion-col>
-          <!-- MÉTODOS DE PAGO -->
-          <ion-col>
-            <ion-list>
-              <ion-item>
-                <ion-select
-                  :label="t('miPerfil.metodosPago')"
-                  label-placement="stacked"
-                  v-model="metodosPagoSelec"
-                  @ionChange="cambioTipoLogin()"
-                  :disabled=esConsulta
-                  fill="outline" >
-                  <ion-select-option v-for="pago in lstMetodosPago"
-                    :key="pago.nombre" :value="pago">
-                    {{ pago.nombre }}
-                  </ion-select-option>
-                </ion-select>
-              </ion-item>
-            </ion-list>
-          </ion-col>
-        </ion-row>        
-        <ion-row cols="1" cols-sm="2" cols-md="2" cols-lg="2">
-          <!-- DIVISAS ACEPTADAS -->
-          <ion-col>
-            <ion-list>
-              <ion-item>
-                <ion-select
-                  :label="t('miPerfil.divisasAceptadas')"
-                  label-placement="stacked"
-                  v-model="divisaSelec"
-                  @ionChange="cambioTipoLogin()"
-                  :disabled=esConsulta
-                  fill="outline" >
-                  <ion-select-option v-for="divisas in lstDivisas"
-                    :key="divisas.nombreLargo" :value="divisas">
-                    {{ divisas.nombreLargo }}
-                  </ion-select-option>
-                </ion-select>
-              </ion-item>
-            </ion-list>
-          </ion-col>
-          <!-- DISTANCIA EN -->
-          <ion-col>
-            <ion-list>
-              <ion-item>
-                  <ion-select
-                    :label="t('miPerfil.distanciaEn')"
-                    label-placement="stacked"
-                    v-model="distanciaEnSelec"
-                    :disabled=esConsulta
-                    @ionChange="cambioDistancia()"
-                    fill="outline" >
-                    <ion-select-option v-for="distancia in lstDistanciaEn"
-                      :key="distancia.nombre" :value="distancia">
-                      {{ distancia.nombre }}
-                    </ion-select-option>
-                  </ion-select>
-              </ion-item>
-            </ion-list>
-          </ion-col>
-        </ion-row>
-        <!--
-        <ion-row>
-          <! -- DISTANCIA -- >
-          <ion-col>
-            <ion-list>
-              <div v-if="distanciaEnSelec.medida === 'km'">
-                <ion-label :disabled="esConsulta">
-                  {{ t('global.kilometros') }} = {{ cantidadDistancia }}
-                </ion-label>
-                <ion-item>
-                  <ion-range
-                    :min="distanciaKmMin"
-                    :max="distanciaKmMax"
-                    :step="1"
-                    :value="cantidadDistancia"
-                    @ionChange="e => cantidadDistancia = e.detail.value"
-                    :disabled="esConsulta"
-                    pin="true" >
-                    <ion-label slot="start">{{ distanciaKmMin }}</ion-label>
-                    <ion-label slot="end">{{ distanciaKmMax }}</ion-label>
-                  </ion-range>
-                </ion-item>
-              </div>
-              <div v-if="distanciaEnSelec.medida === 'mi'">
-                <ion-label :disabled="esConsulta">
-                  {{ t('global.millas') }} = {{ cantidadDistancia }}
-                </ion-label>
-                <ion-item>
-                  <ion-range
-                    :min="distanciaMiMin"
-                    :max="distanciaMiMax"
-                    :step="1"
-                    :value="cantidadDistancia"
-                    @ionChange="e => cantidadDistancia = e.detail.value"
-                    :disabled="esConsulta"
-                    pin="true" >
-                    <ion-label slot="start">{{ distanciaMiMin }}</ion-label>
-                    <ion-label slot="end">{{ distanciaMiMax }}</ion-label>
-                  </ion-range>
-                </ion-item>
-              </div>
-            </ion-list>
-          </ion-col>
-        </ion-row>
-        -->
-      </ion-grid>
+            </div>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      -->
       <hr>
-      <ion-button variant="danger" @click="modalContinuarEliminar()" style="width: 100%;">
+      <ion-button variant="danger" @click="BorrarCuenta()"
+        :disabled="!esConsulta" style="width: 100%;">
         <i class="fas fa-edit big-icon"></i> &nbsp;
-        {{ $t('miPerfil.eliminarCuenta') }} </ion-button>
-      <br><br>
+        {{ t('miPerfil.eliminarCuenta') }} </ion-button>
     </ion-content>
   </ion-page>
 
-  <!-- MODAL CONTINUAR ELIMINAR CUENTA -->
-  <ion-modal ref="modal" :is-open="esModalEliminar">
+  <!-- MODAL CONTINUAR ELIMINAR CUENTA --------------------------------------- -->
+  <ion-modal ref="modalContinuar" :is-open="esModalContinuarEliminar">
     <ion-header>
       <ion-toolbar>
-        <ion-title>{{ $t('miPerfil.eliminarCuenta') }}</ion-title>
+        <ion-title>{{ t('miPerfil.eliminarCuenta') }}</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <p>{{ $t('miPerfil.preguntaEliminarCuenta') }}</p>
+      <p>{{ t('miPerfil.preguntaEliminarCuenta') }}</p>
       <br>
       <center>
         <p>
@@ -245,42 +222,85 @@
         </p>
       </center>
       <!-- TEXTO SOLICITADO PARA ELIMINACIÓN -->
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-text>
-              {{ t('miPerfil.ingresatxt') }} [ {{ t('miPerfil.txtEliminarCuentaANDI') }} ] {{ t('miPerfil.paraProcederElim') }}
-            </ion-text>
-            <!-- Usuario ANDI -->
-            <ion-item>
-              <ion-input
-                :label="t('miPerfil.escribeFrase')"
-                v-model.trim="txtEliminar"
-                @keyup.enter="valContinuarEliminar()"
-                label-placement="stacked"
-                :clear-on-edit="true"
-                maxlength="50"
-                :placeholder="t('txtEliminarCuentaANDI')"
-                fill="outline" >
-              </ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <ion-toggle
-        v-model="toggleButton"
-        label-placement="end" >
-        {{ $t('miPerfil.siQuieroEliminarCuenta') }}
-      </ion-toggle>
+      <ion-text>
+        {{ t('miPerfil.ingresatxt') }} [ {{ t('miPerfil.txtEliminarCuentaANDI') }} ] {{ t('miPerfil.paraProcederElim') }}
+      </ion-text>
+      <!-- Usuario ANDI -->
+      <ion-item>
+        <ion-input
+          :label="t('miPerfil.escribeFrase')"
+          v-model.trim="txtEliminar"
+          @keyup.enter="valContinuarEliminar()"
+          label-placement="stacked"
+          :clear-on-edit="true"
+          maxlength="50"
+          :placeholder="t('miPerfil.txtEliminarCuentaANDI')"
+          @input="txtEliminar = txtEliminar.toUpperCase()"
+          fill="outline" >
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-toggle v-model="toggleButton" label-placement="end" >
+        {{ t('miPerfil.siQuieroEliminarCuenta') }} </ion-toggle>
+      </ion-item>
       <br>
       <hr>
-      <ion-button color="secondary" @click="cerrarModalEliminar">
-        {{ $t('global.no') }}</ion-button>
+      <ion-button color="secondary" @click="cerrarModalContinuarEliminar()">
+        {{ t('global.no') }}</ion-button>
       <ion-button color="danger"
         :disabled='!toggleButton'
-        @click="valContinuarEliminar()">{{ $t('miPerfil.continuarEliminacion') }}</ion-button>
+        @click="valContinuarEliminar()">{{ t('miPerfil.continuarEliminacion') }}</ion-button>
     </ion-content>
   </ion-modal>
+
+  <!-- MODAL ELIMINAR CUENTA ------------------------------------------------- -->
+  <ion-modal ref="modalEliminar" :is-open="esModalEliminar">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>{{ t('miPerfil.eliminarCuenta') }}</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <center>
+        <i class="far fa-envelope big-icon"></i>
+        {{ correo }}
+        <br>
+        <!-- CODIGO PARA VALIDAR CORREO -->
+        <!-- <ctrlCodigoSMS @codigo-completo="recibirCodigoCorreo" /> -->
+        <ion-input-otp length="6" shape="round" fill="outline"
+          v-model="codigoCorreo">
+          {{ t('miPerfil.ingresarCodigoCorreo') }} </ion-input-otp>
+      </center>
+      <br>
+      <hr>
+      <ion-button color="secondary" @click="cerrarModalEliminar()">
+        {{ $t('global.no') }}</ion-button>
+      <ion-button color="danger" @click="valEliminarCuenta()">
+        {{ $t('miPerfil.eliminarMiCuenta') }}</ion-button>
+    </ion-content>
+  </ion-modal>
+
+  <!-- OVERLAY CON SPINNER ------------------------------------------------ -->
+  <div v-if="mostrarOverlaySpinner"> 
+    <ion-backdrop :visible="true" class="custom-overlay-backdrop"></ion-backdrop>
+    <div class="overlay-content-wrapper">
+      <div class="overlay-content">
+        <ion-spinner color="secondary" name="lines"
+          style="width: 3rem; height: 3rem;"></ion-spinner>
+        <p class="mt-3">{{ txtOverlaySpinner }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!--
+  <div v-if="mostrarOverlaySpinner" class="overlay">
+    <div class="overlay-content">
+      <ion-spinner color="secondary" name="lines"
+        style="width: 3rem; height: 3rem;"></ion-spinner>
+      <p class="mt-3">{{ txtOverlaySpinner }}</p>
+    </div>
+  </div>
+  -->
 
 </template>
 <script setup lang="ts">
@@ -289,7 +309,8 @@
     IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, 
     IonItem, IonLabel, IonInput, IonSelect, IonSelectOption, IonButton, IonSpinner, 
     IonModal, IonToggle, IonFab, IonFabButton, IonIcon, IonButtons, IonCheckbox, 
-    IonMenu, IonMenuButton, IonSplitPane, IonRange, IonList, IonText
+    IonMenu, IonMenuButton, IonSplitPane, IonRange, IonList, IonText, IonAvatar,
+    IonImg, IonInputOtp, IonBackdrop
   } from '@ionic/vue'
   import { getCurrentInstance } from 'vue'
   import { useI18n } from 'vue-i18n'
@@ -319,18 +340,19 @@
     { id: 1, nombre: 'Horas' },
     { id: 2, nombre: 'Días' }
   ])
-  const zonaHorariaSelec = ref({})
+  const zonaHorariaSelec = ref({ id: 0, zonaHoraria: '' })
   const lstZonaHoraria = ref([])
-  const metodosPagoSelec = ref([])
+  const metodosPagoSelec = ref({ id: 0, nombre: '', esActivo: true })
   const lstMetodosPago = ref([])
-  const divisaSelec = ref([])
+  const divisaSelec = ref({ id: 0, precioDolar: 0, pais: '', nombreCorto: '',
+                            nombreLargo: '', simbolo: '', codigoISO: '' })
   const lstDivisas = ref([])
-  const formatoFechaSelec = ref({})
+  const formatoFechaSelec = ref({ id: 0, nombre: '', formato: '' })
   const lstFormatoFecha = ref([
     { id: 0, nombre: '24/Dic/2024', formato: 'dd/MMM/yyyy' },
     { id: 1, nombre: 'Dic/24/2024', formato: 'MMM/dd/yyyy' }
   ])
-  const formatoHoraSelec = ref({})
+  const formatoHoraSelec = ref({ id: 0, nombre: '', formato: ''})
   const lstFormatoHora = ref([
     { id: 0, nombre: '20:00', formato: 'HH:mm' },
     { id: 1, nombre: '08:00 PM', formato: 'hh:mm A' }
@@ -347,7 +369,13 @@
   const distanciaMiMin = ref(1)
   const distanciaMiMax = ref(30)
   const txtEliminar = ref('')
+  const esModalContinuarEliminar = ref(false)
   const esModalEliminar = ref(false)
+  const fileInput = ref(null)
+  const mostrarOverlaySpinner = ref(false)
+  const txtOverlaySpinner = ref('')
+  const codigoCorreo = ref('')
+
 
   // -----------------------------------------
   // FUNCIONES LOCALES
@@ -365,9 +393,11 @@
     traduccion()
     listaZonaHoraria()
     avatarSrc.value = localStorage.getItem('urlImg')
+    esModalContinuarEliminar.value = false
+    esModalEliminar.value = false
   })
   const traduccion = () => {
-    for (var x in lstTiempoAgendar.value) {
+    for (let x in lstTiempoAgendar.value) {
       if (lstTiempoAgendar.value[x].id === 0) { // id: 0, nombre: 'Minutos'
         lstTiempoAgendar.value[x].nombre = t('global.minutos')
       }
@@ -405,7 +435,7 @@
       })
   }
   const traducirMetodosPago = () => {
-    for (var x in lstMetodosPago.value) {
+    for (let x in lstMetodosPago.value) {
       if (lstMetodosPago.value[x].id === 1) { // id: 1 'Efectivo'
         lstMetodosPago.value[x].nombre = t('global.efectivo')
       }
@@ -452,9 +482,9 @@
     metodosPagoSelec.value = lstMetodosPago.value.find(q => q.id === parseInt(localStorage.getItem('idMetodoPago')))
     distanciaEnSelec.value = lstDistanciaEn.value.find(q => q.medida === localStorage.getItem('distanciaEn'))
     cantidadDistancia.value = parseInt(localStorage.getItem('cantidadDistancia'))
-    var temp = lstDivisas.value.find(q => q.id === parseInt(localStorage.getItem('idMoneda')))
+    let temp = lstDivisas.value.find(q => q.id === parseInt(localStorage.getItem('idMoneda')))
     divisaSelec.value = temp
-    for (var x in lstDivisas.value) {
+    for (let x in lstDivisas.value) {
       if (lstDivisas.value[x].id === 1) { // id: 1, nombre: "MXN - Peso Mexicano"
         lstDivisas.value[x].nombreLargo = t('global.pesoMexicano')
       }
@@ -488,12 +518,223 @@
   const modalContinuarEliminar = () => {
     toggleButton.value = false
     txtEliminar.value = ''
-    esModalEliminar.value = true
+    esModalContinuarEliminar.value = true
+  }
+  const cerrarModalContinuarEliminar = () => {
+    esModalContinuarEliminar.value = false
   }
   const cerrarModalEliminar = () => {
     esModalEliminar.value = false
   }
   const txtEliminarMayusculas = (event) => {
     txtEliminar.value = event.toUpperCase()
+  }
+  const validarPreferencias = async () => {
+    // MÉTODOS DE PAGO
+    if (metodosPagoSelec.value.id === 0) {
+      await $globalFunc.mostrarToast(
+        t('miPerfil.valMetodosPago'),
+        t('global.validacion'),
+        5000,
+        'warning')
+      return
+    }
+    // DIVISAS ACEPTADAS
+    if (divisaSelec.value.id === 0) {
+      await $globalFunc.mostrarToast(
+        t('miPerfil.valdivisasAceptadas'),
+        t('global.validacion'),
+        5000,
+        'warning')
+      return
+    }
+    // SIN ERRORES ========================
+    jsonPreferencias()
+  }
+  const jsonPreferencias = () => {
+    let data = {
+      idCliente: localStorage.getItem('idCliente'),
+      FormatoFecha: formatoFechaSelec.value.formato,
+      FormatoHora: formatoHoraSelec.value.formato,
+      idZonaHoraria: zonaHorariaSelec.value.id,
+      distanciaEn: distanciaEnSelec.value.medida,
+      cantidadDistancia: cantidadDistancia.value,
+      idMetodoPago: metodosPagoSelec.value.id,
+      idMoneda: divisaSelec.value.id,
+      colorTema: localStorage.getItem('colorTema'),
+      idioma: localStorage.getItem('idiomaSelec')
+    }
+    actualizarPreferencias(data)
+  }
+  const actualizarPreferencias = (data) => {
+    axios.post($api + '/Cliente/guardarConfigCliente/', data)
+      .then(function (response) {
+        console.log('Cliente/guardarConfigCliente ---')
+        console.log(response.data)
+        actualizacionPerfilExitosa()
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+  const actualizacionPerfilExitosa = async () => {
+    await $globalFunc.mostrarToast(
+      t('global.edicionExitosa'),
+      t('miPerfil.miPerfil'),
+      5000,
+      'success')
+    localStorage.setItem('formatoFecha', formatoFechaSelec.value.formato)
+    localStorage.setItem('formatoHora', formatoHoraSelec.value.formato)
+    localStorage.setItem('idZonaHoraria', zonaHorariaSelec.value.id.toString())
+    localStorage.setItem('idMetodoPago', metodosPagoSelec.value.id.toString())
+    localStorage.setItem('idMoneda', divisaSelec.value.id.toString())
+    localStorage.setItem('distanciaEn', distanciaEnSelec.value.medida)
+    localStorage.setItem('cantidadDistancia', cantidadDistancia.value.toString())
+    estatus.value = 'CONSULTA'
+    esConsulta.value = true
+  }
+  const solicitarImg = () => {
+    console.log('solicitarImg() ---')
+    fileInput.value.click()
+  }
+  const cambioImgPerfil = (event) => {
+    let file = event.target.files[0]
+    if (file) {
+      // 1. Previsualización: Crea una URL temporal para el ion-avatar.
+      avatarSrc.value = URL.createObjectURL(file)
+      // 2. Preparación para subir: Crea un objeto FormData.
+      let formData = new FormData()
+      // El nombre 'imagen' es un ejemplo. Debe coincidir con cómo espera el archivo tu backend (API).
+      formData.append('file', file)
+      console.log('--- formData')
+      console.log(formData)
+      console.log('--- localStorage idCliente')
+      console.log(localStorage.getItem('idCliente'))
+      // La URL ya tiene el 'idCliente' en el query string, lo cual está bien.
+      let uploadUrl = $api + '/Cliente/SubirImagenPerfil?idCliente=' + encodeURIComponent(idCliente.value)
+      try {
+        axios.post(uploadUrl, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then(function (response) {
+          let resp = response.data
+          console.log('--- resp SubirImagenPerfil')
+          console.log(resp)
+          localStorage.setItem('urlImg', resp.url)
+          avatarSrc.value = localStorage.getItem('urlImg')
+          location.reload()
+        })
+          .catch(function (error) {
+            console.log(error)
+          })
+      } catch (error) {
+        console.log(error)
+      }
+      console.log('Archivo seleccionado:', file.name)
+    }
+  }
+  const valContinuarEliminar = async () => {
+    if (!toggleButton) return
+    // TEXTO SOLICITADO PARA ELIMINACIÓN
+    if (txtEliminar.value.trim() !== t('miPerfil.txtEliminarCuentaANDI')) {
+      await $globalFunc.mostrarToast(
+        t('miPerfil.textosNoCoinciden'),
+        t('global.validacion'),
+        5000,
+        'warning')
+      return
+    }
+    mostrarOverlaySpinner
+    mostrarOverlaySpinner.value = true
+    txtOverlaySpinner.value = t('miPerfil.valSolicitud')
+    console.log('encodeURIComponent(correo.value) ---')
+    console.log(encodeURIComponent(correo.value))
+    axios.put($api + '/Cliente/clienteCodigoCorreo?correo=' + encodeURIComponent(correo.value))
+      .then(async function (response) {
+        let resp = response.data
+        console.log('resp ---')
+        console.log(resp)
+        esModalContinuarEliminar.value = false
+        if (resp.estatus) {
+          await $globalFunc.mostrarToast(
+            // Mensaje
+            t('miPerfil.revisarCorreoCodigo2') +
+            '\n ' + t('miPerfil.revisarCorreoCodigo3'),
+            // titulo
+            t('miPerfil.revisarCorreoCodigo1') +
+            '"' + correo.value + '"',
+            5000,
+            'warning')
+          mostrarOverlaySpinner.value = false
+          modalEliminarCuenta()
+        } else {
+          await $globalFunc.mostrarToast(
+            t('miPerfil.codigoCorreoIncorrecto'),
+            t('registroCliente.correo'),
+            5000,
+            'warning')
+          mostrarOverlaySpinner.value = false
+        }
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+  const modalEliminarCuenta = () => {
+    esModalEliminar.value = true
+  }
+  const valEliminarCuenta = async () => {
+    let codigo = codigoCorreo.value === null ? '' : codigoCorreo.value
+    mostrarOverlaySpinner.value = true
+    txtOverlaySpinner.value = t('miPerfil.valEliminacion')
+    codigo = codigo.replace(/\D/g, '')
+    console.log('codigo: ' + codigo)
+    console.log(codigo)
+    if (codigo.length < 6) {
+      await $globalFunc.mostrarToast(
+        t('registroCliente.6DigitosCodigoCorreo'),
+        t('global.validacion'),
+        5000,
+        'warning')
+      return
+    }
+    await $globalFunc.mostrarToast(
+      'AQUI SE ELIMINARA LA CUENTA',
+      t('global.validacion'),
+      5000,
+      'warning')
+    console.log('encodeURIComponent(correo.value) ---')
+    console.log(encodeURIComponent(correo.value))
+    console.log('codigo ---')
+    console.log(codigo)
+    mostrarOverlaySpinner.value = false
+    // SIN ERRORES ========================
+    /*
+    axios.post($api + '/Cliente/borrarCuentaANDI?correo=' + encodeURIComponent(correo.value) + '&codigo=' + codigo)
+      .then(async function (response) {
+        let cliente = response.data
+        if (cliente.correoElectronico === null) {
+          mostrarOverlaySpinner.value = false
+          await $globalFunc.mostrarToast(
+            t('miPerfil.codigoCorreoIncorrecto'),
+            t('registroCliente.correo'),
+            5000,
+            'warning')
+        } else {
+          let num = 1
+          localStorage.setItem('cuentaANDIEliminada', num.toString())
+          localStorage.setItem('busqueda', null)
+          router.replace('/app/Login')
+          location.reload()
+        }
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+    */
+  }
+  const BorrarCuenta = () => {
+    router.push('/app/BorrarCuenta')
   }
 </script>

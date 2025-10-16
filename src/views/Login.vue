@@ -1,87 +1,84 @@
 <template>
-  <ion-page>
-    <ion-page>
-      <!-- <AppHeader :title="t('menuClientes.login')" /> -->
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-          </ion-buttons>
-          <ion-title>{{ t('menuClientes.login') }}</ion-title>
-        </ion-toolbar>
-      </ion-header> 
-      <ion-content :fullscreen="true" class="ion-padding">
-        <div class="centrar-login">
-          <br>
-          <!-- Logo ANDI --> 
-          <center>
-            <ion-img
-              alt=""
-              src="/img/Logo ANDI 500.png"
-              style="width: 120px; height: 120px;"
-            ></ion-img>
-          </center>
-          <!-- <i class="fas fa-search big-icon"></i> -->
-          <br>
-          <ion-list>
-            <!-- Tipo Login --> 
-            <ion-item>
-              <ion-select
-                :label="t('login.loginPor')"
-                v-model="tipoLoginSelec"
-                @ionChange="cambioTipoLogin()"
-                fill="outline" >
-                <ion-select-option v-for="login in lstTipoLogin"
-                  :key="login.nombre" :value="login">
-                  {{ login.nombre }}
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
-            <!-- Usuario ANDI -->
-            <ion-item>
-              <ion-input
-                v-model.trim="credenciales.usuario"
-                :label="t('login.usuario')"
-                label-placement="stacked"
-                :clear-on-edit="true"
-                maxlength="30"
-                :placeholder="t('login.ingresaUsuario')"
-                fill="outline" >
-              </ion-input>
-            </ion-item>
-            <!-- Contraseña -->
-            <ion-item>
-              <ion-input
-                type="password"
-                v-model="credenciales.password"
-                @keyup.enter="validarLogin()"
-                :label="t('login.pass')"
-                label-placement="stacked"
-                :clear-on-edit="true"
-                maxlength="30"
-                :placeholder="t('login.ingresaContraseña')"
-                fill="outline" >
-                <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-              </ion-input>
-            </ion-item>
-          </ion-list>
-          <br>
-          <!-- Botón Ingresar -->
-          <ion-button @click="validarLogin()" size="small" style="width: 100%;">
-            {{ t('login.ingresar') }}
-          </ion-button>
-          <ion-grid>
-            <ion-row>
-              <ion-col>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </div>
-      </ion-content>
-    </ion-page>
-  </ion-page>
+  <!-- <AppHeader :title="t('menuClientes.login')" /> -->
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons>
+        <ion-menu-button></ion-menu-button>
+        <ion-title>{{ t('menuClientes.login') }}</ion-title>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header> 
+  <ion-content :fullscreen="true" class="ion-padding">
+    <div class="centrar-login">
+      <br>
+      <!-- Logo ANDI --> 
+      <center>
+        <ion-img
+          alt=""
+          src="/img/Logo ANDI 500.png"
+          style="width: 120px; height: 120px;"
+        ></ion-img>
+      </center>
+      <!-- <i class="fas fa-search big-icon"></i> -->
+      <br>
+      <ion-list>
+        <!-- Tipo Login --> 
+        <ion-item>
+          <ion-select
+            :label="t('login.loginPor')"
+            v-model="tipoLoginSelec"
+            @ionChange="cambioTipoLogin()"
+            fill="outline" >
+            <ion-select-option v-for="login in lstTipoLogin"
+              :key="login.nombre" :value="login">
+              {{ login.nombre }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <!-- Usuario ANDI -->
+        <ion-item>
+          <ion-input
+            v-model.trim="credenciales.usuario"
+            :label="t('login.usuario')"
+            label-placement="stacked"
+            :clear-on-edit="true"
+            maxlength="30"
+            :placeholder="t('login.ingresaUsuario')"
+            @input="credenciales.usuario = credenciales.usuario.toUpperCase()"
+            fill="outline" >
+          </ion-input>
+        </ion-item>
+        <!-- Contraseña -->
+        <ion-item>
+          <ion-input
+            type="password"
+            v-model="credenciales.password"
+            @keyup.enter="validarLogin()"
+            :label="t('login.pass')"
+            label-placement="stacked"
+            :clear-on-edit="true"
+            maxlength="30"
+            :placeholder="t('login.ingresaContraseña')"
+            fill="outline" >
+            <ion-input-password-toggle></ion-input-password-toggle>
+          </ion-input>
+        </ion-item>
+      </ion-list>
+      <br>
+      <!-- Botón Ingresar -->
+      <ion-button @click="validarLogin()" size="small" style="width: 100%;">
+        {{ t('login.ingresar') }}
+      </ion-button>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-content>
 
-  <!-- OVERLAY CON SPINNER -->
+  <!-- OVERLAY CON SPINNER ------------------------------------------------ -->
   <div v-if="mostrarOverlaySpinner" class="overlay">
     <div class="overlay-content">
       <ion-spinner color="secondary" name="lines"
@@ -93,7 +90,7 @@
 <script setup lang="ts">
   import { ref, onMounted } from 'vue'
   import { 
-    IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, 
+    IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, 
     IonItem, IonLabel, IonInput, IonSelect, IonSelectOption, IonButton, IonSpinner, 
     IonModal, IonToggle, IonFab, IonFabButton, IonIcon, IonButtons 
   } from '@ionic/vue'
@@ -139,7 +136,6 @@
   // Lógica de mounted()
   onMounted(() => {
     listaLogin()
-    console.log('Login onMounted')
     let usuario = localStorage.getItem('usuario')
     if (usuario === null || usuario === '' || usuario === 'null') {
       usuario = ''

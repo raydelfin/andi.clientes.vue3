@@ -1,7 +1,12 @@
-// import { createRouter, createWebHistory } from 'vue-router'
-import { createRouter, createWebHistory } from '@ionic/vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+// import { createRouter, createWebHistory } from '@ionic/vue-router'
 import type { RouteRecordRaw, RouteLocationNormalized } from 'vue-router'
 import MainLayout from '../views/MainLayout.vue' // El nuevo layout
+import Login from '../views/Login.vue'
+import Buscar from '../views/Buscar.vue'
+import Favoritos from '../views/Favoritos.vue'
+import MiPerfil from '../views/MiPerfil.vue'
+import BorrarCuenta from '../views/BorrarCuenta.vue'
 
 const routes: Array<RouteRecordRaw> = [{
   path: '/app', // Ruta padre que carga MainLayout
@@ -9,19 +14,23 @@ const routes: Array<RouteRecordRaw> = [{
   children: [
     {
       path: 'Login', 
-      component: () => import('@/views/Login.vue') // Debe usar import dinámico si las otras lo usan
+      component: Login // Debe usar import dinámico si las otras lo usan
     },
     {
       path: 'Buscar', 
-      component: () => import('@/views/Buscar.vue')
+      component: Buscar
     },
     {
       path: 'Favoritos', 
-      component: () => import('../views/Favoritos.vue')
+      component: Favoritos
     },
     {
       path: 'MiPerfil', 
-      component: () => import('../views/MiPerfil.vue')
+      component: MiPerfil
+    },
+    {
+      path: 'BorrarCuenta', 
+      component: BorrarCuenta
     }
   ]
 }]

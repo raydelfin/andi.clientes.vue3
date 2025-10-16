@@ -6,6 +6,4 @@ function checkInitialAuth() {
 export const isAuthenticatedRef = ref(checkInitialAuth())
 export function updateAuthStatus(isLoggedIn: boolean) {
     isAuthenticatedRef.value = isLoggedIn
-    console.log('isAuthenticatedRef.value ---')
-    console.log(isAuthenticatedRef.value)
 }

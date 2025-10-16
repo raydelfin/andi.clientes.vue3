@@ -391,7 +391,11 @@
     "revisarCorreoCodigo3": "Note: also check your spam folder",
     "continuarEliminacion": "Continue with Deletion",
     "eliminarMiCuenta": "Delete my ANDI account",
-    "escribeFrase": "Write the sentence"
+    "escribeFrase": "Write the sentence",
+    "valMetodosPago": "Select a Payment Method",
+    "valdivisasAceptadas": "Select a Currency",
+    "codigoEnviado": "Code Sent",
+    "cuentaBorradaExitosamente": "ANDI account successfully deleted"
   },
   "registroCliente": {
     "paso": "Step",
