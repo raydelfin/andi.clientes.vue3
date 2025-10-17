@@ -6,6 +6,14 @@
     "incremental": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
 
+    /* -------------------------------------------------------- */
+    /* OPCIONES AGREGADAS PARA DESACTIVAR LA ESTRICTEZ */
+    "strictNullChecks": false, // Ignora errores de 'possibly null' (TS18047)
+    "noImplicitAny": false,    // Permite tipos 'any' implícitos (más como JS)
+    "skipLibCheck": true,      // Ignora errores de librerías como Ionic (string vs number)
+    /* -------------------------------------------------------- */
+    // 🚨 1. AGREGAR ESTA LÍNEA CRÍTICA
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }

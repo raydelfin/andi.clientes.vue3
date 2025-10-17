@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 function checkInitialAuth() {
-    let usuario = localStorage.getItem('usuario')
+    const usuario = localStorage.getItem('usuario')
     return !(usuario === null || usuario === '' || usuario === 'null')
 }
 export const isAuthenticatedRef = ref(checkInitialAuth())

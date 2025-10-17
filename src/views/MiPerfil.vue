@@ -13,7 +13,7 @@
       <ion-grid>
         <ion-row>
           <ion-col style="max-width: 135px;">
-            <center>
+            <div class="centrar">
               <div @click="solicitarImg">
                 <ion-avatar>
                   <ion-img :src="avatarSrc" size="100px" />
@@ -31,17 +31,17 @@
                 <i class="fas fa-pencil-alt big-icon"
                   style="top: 8px; position: absolute; right: 6px;" />
               </ion-badge>
-            </center>
+            </div>
           </ion-col>
           <ion-col>
-            <center>
+            <div class="centrar">
               {{ usuario }}
               <br>
               {{ nomCliente }}
               <br>
               <i class="far fa-envelope big-icon"></i>
               {{ correo }}
-            </center>
+            </div>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -81,7 +81,6 @@
             :label="t('miPerfil.formatoHora')"
             label-placement="stacked"
             v-model="formatoHoraSelec"
-            @ionChange="cambioTipoLogin()"
             :disabled=esConsulta
             fill="outline" >
             <ion-select-option v-for="formato in lstFormatoHora"
@@ -110,7 +109,6 @@
             :label="t('miPerfil.metodosPago')"
             label-placement="stacked"
             v-model="metodosPagoSelec"
-            @ionChange="cambioTipoLogin()"
             :disabled=esConsulta
             fill="outline" >
             <ion-select-option v-for="pago in lstMetodosPago"
@@ -125,7 +123,6 @@
             :label="t('miPerfil.divisasAceptadas')"
             label-placement="stacked"
             v-model="divisaSelec"
-            @ionChange="cambioTipoLogin()"
             :disabled=esConsulta
             fill="outline" >
             <ion-select-option v-for="divisas in lstDivisas"
@@ -213,14 +210,14 @@
     <ion-content class="ion-padding">
       <p>{{ t('miPerfil.preguntaEliminarCuenta') }}</p>
       <br>
-      <center>
+      <div class="centrar">
         <p>
           <ion-avatar>
             <ion-img :src="avatarSrc" size="100px" />
           </ion-avatar>
           {{ usuario }}
         </p>
-      </center>
+      </div>
       <!-- TEXTO SOLICITADO PARA ELIMINACIÓN -->
       <ion-text>
         {{ t('miPerfil.ingresatxt') }} [ {{ t('miPerfil.txtEliminarCuentaANDI') }} ] {{ t('miPerfil.paraProcederElim') }}
@@ -233,7 +230,7 @@
           @keyup.enter="valContinuarEliminar()"
           label-placement="stacked"
           :clear-on-edit="true"
-          maxlength="50"
+          :maxlength="50"
           :placeholder="t('miPerfil.txtEliminarCuentaANDI')"
           @input="txtEliminar = txtEliminar.toUpperCase()"
           fill="outline" >
@@ -261,16 +258,16 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <center>
+      <div class="centrar">
         <i class="far fa-envelope big-icon"></i>
         {{ correo }}
         <br>
         <!-- CODIGO PARA VALIDAR CORREO -->
         <!-- <ctrlCodigoSMS @codigo-completo="recibirCodigoCorreo" /> -->
-        <ion-input-otp length="6" shape="round" fill="outline"
+        <ion-input-otp :length="6" shape="round" fill="outline"
           v-model="codigoCorreo">
           {{ t('miPerfil.ingresarCodigoCorreo') }} </ion-input-otp>
-      </center>
+      </div>
       <br>
       <hr>
       <ion-button color="secondary" @click="cerrarModalEliminar()">
@@ -287,37 +284,26 @@
       <div class="overlay-content">
         <ion-spinner color="secondary" name="lines"
           style="width: 3rem; height: 3rem;"></ion-spinner>
-        <p class="mt-3">{{ txtOverlaySpinner }}</p>
+        <p>{{ txtOverlaySpinner }}</p>
       </div>
     </div>
   </div>
-
-  <!--
-  <div v-if="mostrarOverlaySpinner" class="overlay">
-    <div class="overlay-content">
-      <ion-spinner color="secondary" name="lines"
-        style="width: 3rem; height: 3rem;"></ion-spinner>
-      <p class="mt-3">{{ txtOverlaySpinner }}</p>
-    </div>
-  </div>
-  -->
 
 </template>
 <script setup lang="ts">
   import { ref, onMounted } from 'vue'
   import { 
     IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, 
-    IonItem, IonLabel, IonInput, IonSelect, IonSelectOption, IonButton, IonSpinner, 
-    IonModal, IonToggle, IonFab, IonFabButton, IonIcon, IonButtons, IonCheckbox, 
-    IonMenu, IonMenuButton, IonSplitPane, IonRange, IonList, IonText, IonAvatar,
-    IonImg, IonInputOtp, IonBackdrop
+    IonItem, IonInput, IonSelect, IonSelectOption, IonButton, IonSpinner, 
+    IonModal, IonToggle, IonButtons, IonMenuButton, IonList, IonText, IonAvatar,
+    IonImg, IonInputOtp, IonBackdrop, IonBadge
   } from '@ionic/vue'
   import { getCurrentInstance } from 'vue'
   import { useI18n } from 'vue-i18n'
   import axios from 'axios'
   import { useRouter } from 'vue-router'
 
-  const { t, locale } = useI18n()
+  const { t/*, locale*/ } = useI18n()
 
   // VARIABLES ------------------------------
   // ***********************
@@ -364,10 +350,12 @@
   ])
   const toggleButton = ref(false)
   const cantidadDistancia = ref(1)
+  /*
   const distanciaKmMin = ref(1)
   const distanciaKmMax = ref(50)
   const distanciaMiMin = ref(1)
   const distanciaMiMax = ref(30)
+  */
   const txtEliminar = ref('')
   const esModalContinuarEliminar = ref(false)
   const esModalEliminar = ref(false)
@@ -397,7 +385,7 @@
     esModalEliminar.value = false
   })
   const traduccion = () => {
-    for (let x in lstTiempoAgendar.value) {
+    for (const x in lstTiempoAgendar.value) {
       if (lstTiempoAgendar.value[x].id === 0) { // id: 0, nombre: 'Minutos'
         lstTiempoAgendar.value[x].nombre = t('global.minutos')
       }
@@ -435,7 +423,7 @@
       })
   }
   const traducirMetodosPago = () => {
-    for (let x in lstMetodosPago.value) {
+    for (const x in lstMetodosPago.value) {
       if (lstMetodosPago.value[x].id === 1) { // id: 1 'Efectivo'
         lstMetodosPago.value[x].nombre = t('global.efectivo')
       }
@@ -482,9 +470,9 @@
     metodosPagoSelec.value = lstMetodosPago.value.find(q => q.id === parseInt(localStorage.getItem('idMetodoPago')))
     distanciaEnSelec.value = lstDistanciaEn.value.find(q => q.medida === localStorage.getItem('distanciaEn'))
     cantidadDistancia.value = parseInt(localStorage.getItem('cantidadDistancia'))
-    let temp = lstDivisas.value.find(q => q.id === parseInt(localStorage.getItem('idMoneda')))
+    const temp = lstDivisas.value.find(q => q.id === parseInt(localStorage.getItem('idMoneda')))
     divisaSelec.value = temp
-    for (let x in lstDivisas.value) {
+    for (const x in lstDivisas.value) {
       if (lstDivisas.value[x].id === 1) { // id: 1, nombre: "MXN - Peso Mexicano"
         lstDivisas.value[x].nombreLargo = t('global.pesoMexicano')
       }
@@ -515,20 +503,24 @@
       cantidadDistancia.value = 30
     }
   }
+  /*
   const modalContinuarEliminar = () => {
     toggleButton.value = false
     txtEliminar.value = ''
     esModalContinuarEliminar.value = true
   }
+  */
   const cerrarModalContinuarEliminar = () => {
     esModalContinuarEliminar.value = false
   }
   const cerrarModalEliminar = () => {
     esModalEliminar.value = false
   }
+  /*
   const txtEliminarMayusculas = (event) => {
     txtEliminar.value = event.toUpperCase()
   }
+  */
   const validarPreferencias = async () => {
     // MÉTODOS DE PAGO
     if (metodosPagoSelec.value.id === 0) {
@@ -552,7 +544,7 @@
     jsonPreferencias()
   }
   const jsonPreferencias = () => {
-    let data = {
+    const data = {
       idCliente: localStorage.getItem('idCliente'),
       FormatoFecha: formatoFechaSelec.value.formato,
       FormatoHora: formatoHoraSelec.value.formato,
@@ -598,12 +590,12 @@
     fileInput.value.click()
   }
   const cambioImgPerfil = (event) => {
-    let file = event.target.files[0]
+    const file = event.target.files[0]
     if (file) {
       // 1. Previsualización: Crea una URL temporal para el ion-avatar.
       avatarSrc.value = URL.createObjectURL(file)
       // 2. Preparación para subir: Crea un objeto FormData.
-      let formData = new FormData()
+      const formData = new FormData()
       // El nombre 'imagen' es un ejemplo. Debe coincidir con cómo espera el archivo tu backend (API).
       formData.append('file', file)
       console.log('--- formData')
@@ -611,14 +603,14 @@
       console.log('--- localStorage idCliente')
       console.log(localStorage.getItem('idCliente'))
       // La URL ya tiene el 'idCliente' en el query string, lo cual está bien.
-      let uploadUrl = $api + '/Cliente/SubirImagenPerfil?idCliente=' + encodeURIComponent(idCliente.value)
+      const uploadUrl = $api + '/Cliente/SubirImagenPerfil?idCliente=' + encodeURIComponent(idCliente.value)
       try {
         axios.post(uploadUrl, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
         }).then(function (response) {
-          let resp = response.data
+          const resp = response.data
           console.log('--- resp SubirImagenPerfil')
           console.log(resp)
           localStorage.setItem('urlImg', resp.url)
@@ -635,7 +627,7 @@
     }
   }
   const valContinuarEliminar = async () => {
-    if (!toggleButton) return
+    if (!toggleButton.value) return
     // TEXTO SOLICITADO PARA ELIMINACIÓN
     if (txtEliminar.value.trim() !== t('miPerfil.txtEliminarCuentaANDI')) {
       await $globalFunc.mostrarToast(
@@ -645,14 +637,13 @@
         'warning')
       return
     }
-    mostrarOverlaySpinner
     mostrarOverlaySpinner.value = true
     txtOverlaySpinner.value = t('miPerfil.valSolicitud')
     console.log('encodeURIComponent(correo.value) ---')
     console.log(encodeURIComponent(correo.value))
     axios.put($api + '/Cliente/clienteCodigoCorreo?correo=' + encodeURIComponent(correo.value))
       .then(async function (response) {
-        let resp = response.data
+        const resp = response.data
         console.log('resp ---')
         console.log(resp)
         esModalContinuarEliminar.value = false

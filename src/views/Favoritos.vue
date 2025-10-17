@@ -27,26 +27,26 @@
 
 </template>
 <script setup lang="ts">
-  import { ref, onMounted } from 'vue'
+  import { /*ref,*/ onMounted } from 'vue'
   import { 
     IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, 
-    IonItem, IonLabel, IonInput, IonSelect, IonSelectOption, IonButton, IonSpinner, 
-    IonModal, IonToggle, IonFab, IonFabButton, IonIcon, IonButtons, IonCheckbox, 
-    IonMenu, IonMenuButton, IonSplitPane
+    IonButton, IonMenuButton
   } from '@ionic/vue'
-  import { getCurrentInstance } from 'vue'
+  // import { getCurrentInstance } from 'vue'
   import { useI18n } from 'vue-i18n'
-  import axios from 'axios'
-  import { useRouter } from 'vue-router'
+  // import axios from 'axios'
+  // import { useRouter } from 'vue-router'
 
-  const { t, locale } = useI18n()
+  const { t /*, locale*/ } = useI18n()
 
   // VARIABLES ------------------------------
   // ***********************
+  /*
   const app = getCurrentInstance();
   const $globalFunc = app?.appContext.config.globalProperties.$globalFunc
   const $api = app?.appContext.config.globalProperties.$api as string
   const router = useRouter()
+  */
   // // ***********************
   
   // -----------------------------------------

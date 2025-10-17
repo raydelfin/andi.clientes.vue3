@@ -1,5 +1,4 @@
 <template>
-  <!-- <AppHeader :title="t('menuClientes.login')" /> -->
   <ion-header>
     <ion-toolbar>
       <ion-buttons>
@@ -12,20 +11,20 @@
     <div class="centrar-login">
       <br>
       <!-- Logo ANDI --> 
-      <center>
+      <div class="centrar">
         <ion-img
           alt=""
           src="/img/Logo ANDI 500.png"
           style="width: 120px; height: 120px;"
         ></ion-img>
-      </center>
+      </div>
       <!-- <i class="fas fa-search big-icon"></i> -->
       <br>
       <ion-list>
         <!-- Tipo Login --> 
         <ion-item>
           <ion-select
-            :label="t('login.loginPor')"
+            :label="$t('login.loginPor')"
             v-model="tipoLoginSelec"
             @ionChange="cambioTipoLogin()"
             fill="outline" >
@@ -42,8 +41,8 @@
             :label="t('login.usuario')"
             label-placement="stacked"
             :clear-on-edit="true"
-            maxlength="30"
-            :placeholder="t('login.ingresaUsuario')"
+            :maxlength="30"
+            :placeholder="$t('login.ingresaUsuario')"
             @input="credenciales.usuario = credenciales.usuario.toUpperCase()"
             fill="outline" >
           </ion-input>
@@ -57,10 +56,10 @@
             :label="t('login.pass')"
             label-placement="stacked"
             :clear-on-edit="true"
-            maxlength="30"
+            :maxlength="30"
             :placeholder="t('login.ingresaContraseña')"
             fill="outline" >
-            <ion-input-password-toggle></ion-input-password-toggle>
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
           </ion-input>
         </ion-item>
       </ion-list>
@@ -87,36 +86,44 @@
     </div>
   </div>
 </template>
+<!-- ************************************************************************************************************************************************************* -->
+<!-- SCRIPT ****************************************************************************************************************************************************** -->
+<!-- ************************************************************************************************************************************************************* -->
 <script setup lang="ts">
+  // import { i18n, t } from '../i18n'
+  // import mensajesEs from '../idiomas/esp.json'
+  import { useI18n } from 'vue-i18n'
+  import { useTranslations } from '../composables/useTranslations';
   import { ref, onMounted } from 'vue'
   import { 
     IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, 
-    IonItem, IonLabel, IonInput, IonSelect, IonSelectOption, IonButton, IonSpinner, 
-    IonModal, IonToggle, IonFab, IonFabButton, IonIcon, IonButtons 
+    IonItem, IonInput, IonSelect, IonSelectOption, IonButton, IonSpinner, 
+    IonButtons, IonMenuButton,
+    IonImg, IonInputPasswordToggle, IonList
   } from '@ionic/vue'
   import { getCurrentInstance } from 'vue'
-  import { useI18n } from 'vue-i18n'
   import axios from 'axios'
   import { useRouter } from 'vue-router'
-  import { isAuthenticatedRef, updateAuthStatus } from '../stores/authStore'
+  import { /*isAuthenticatedRef,*/ updateAuthStatus } from '../stores/authStore'
     
   // VARIABLES --------------------------------------------------------------------------------
   // **********************************************
+  // const { t } = useI18n()
   const { t, locale } = useI18n()
-  const app = getCurrentInstance();
+  const app = getCurrentInstance()
   const $globalFunc = app?.appContext.config.globalProperties.$globalFunc
   const $api = app?.appContext.config.globalProperties.$api as string
   const router = useRouter()
   // // **********************************************
   const status = ref('otraCuenta')
   const lstTipoLogin = ref<Array<{ valor: number, nombre: string }>>([])
-  const tipoLoginSelec = ref({ valor: 1, nombre: '' })
+  const tipoLoginSelec = ref<{ valor: number; nombre: string } | null>(null)
   const paisSelec = ref(null)
   const lstPaises = ref([
     { valor: 1, nombre: '+52' },
     { valor: 2, nombre: '+1' }
   ])
-  const isModalEliminarCuentaOpen = ref(false)
+  // const isModalEliminarCuentaOpen = ref(false)
   const credenciales = ref({
     usuario: '',
     correo: '',
@@ -126,10 +133,10 @@
   const mostrarOverlaySpinner = ref(false)
   const txtOverlaySpinner = ref('')
   const checkInternet = ref(false)
-  const msgToast = ref('')
+  // const msgToast = ref('')
   const usuarioSelec = ref({ valor: 0, usuario: '' })
-  const dismissCountDown = ref(0)
-  const dismissSecs = ref(10)
+  // const dismissCountDown = ref(0)
+  // const dismissSecs = ref(10)
   const lat = ref(0)
   const lon = ref(0)
   // FUNCIONES LOCALES --------------------------------------------------------------------------
@@ -153,24 +160,31 @@
       { valor: 2, nombre: t('login.loginEmail') },
       { valor: 3, nombre: t('login.loginCel') }
     ]
-    tipoLoginSelec.value = lstTipoLogin.value[0] // Asegúrate de usar .value aquí
+    if (lstTipoLogin.value.length > 0) {
+      tipoLoginSelec.value = lstTipoLogin.value[0]!
+    }
   }
+  /*
   const cambiarIdioma = (nuevoLocale) => {
     // Cuando usas 'locale' desde useI18n, es una referencia reactiva (ref), 
     // por lo que debes usar .value para cambiar su valor.
     locale.value = nuevoLocale
     console.log(`Idioma cambiado a: ${locale.value}`)
   }
+  */
   const cambioTipoLogin = () => {
     console.log('cambioTipoLogin() ---')
     console.log('tipoLoginSelec ---')
     console.log(tipoLoginSelec)
-    if (tipoLoginSelec.value.valor === 3) {
-      paisSelec.value = lstPaises.value.find(p => p.valor === 1)
-      console.log('paisSelec ---')
-      console.log(paisSelec)
+    if (tipoLoginSelec.value) {
+      if (tipoLoginSelec.value.valor === 3) {
+        paisSelec.value = lstPaises.value.find(p => p.valor === 1) ?? ''
+        console.log('paisSelec ---')
+        console.log(paisSelec)
+      }
     }
   }
+  /*
   const scrollToTop = async () => {
     const content = document.querySelector('ion-content');
     if (content) {
@@ -182,6 +196,7 @@
     // this.usuarioSelec = u; 
     isModalEliminarCuentaOpen.value = true
   }
+  */
   const validarLogin = async () => {
     // console.log('localStorage.getItem(usuario) ---')
     // console.log(localStorage.getItem('usuario'))
@@ -336,7 +351,7 @@
               localStorage.setItem('firebaseUid', response.data.firebaseUid)
               localStorage.setItem('customToken', response.data.customToken)
               if (response.data.urlImg === '') {
-                localStorage.setItem('urlImg', '/img/avatars/1.png')
+                localStorage.setItem('urlImg', '/img/avatar.png')
               } else {
                 localStorage.setItem('urlImg', response.data.urlImg)
               }
@@ -362,7 +377,7 @@
               mostrarOverlaySpinner.value = false
             },
             (error) => {
-              console.log('Error 1')
+              console.log('Error 1: ', error)
               mostrarOverlaySpinner.value = false
               // error.value = 'Error al obtener ubicación: ' + error.message
             }

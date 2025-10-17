@@ -9,13 +9,7 @@ const isIonic = (tag: string) => tag.startsWith('ion-')
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    vue(/*{
-      template: {
-        compilerOptions: {
-          isCustomElement: isIonic
-        }
-      }
-    }*/),
+    vue(),
     vueDevTools(),
   ],
   resolve: {

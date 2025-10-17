@@ -10,21 +10,21 @@
         <ion-list id="inbox-list">
           <template v-if="esAutenticado">
             <!-- BUSCAR -->
-            <ion-menu-toggle auto-hide="false">
+            <ion-menu-toggle :auto-hide="false">
               <ion-item @click="btnBuscar()" lines="none" button>
                 <ion-icon :icon="search"></ion-icon>
                 &nbsp; <ion-label>{{ t('menuClientes.buscar') }}</ion-label>
               </ion-item>
             </ion-menu-toggle>
             <!-- FAVORITOS -->
-            <ion-menu-toggle auto-hide="false">
+            <ion-menu-toggle :auto-hide="false">
               <ion-item @click="btnFavoritos()" lines="none" button>
                 <ion-icon :icon="heart"></ion-icon>
                 &nbsp; <ion-label>{{ $t('menuClientes.favoritos') }}</ion-label>
               </ion-item>
             </ion-menu-toggle>
             <!-- MI PERFIL -->
-            <ion-menu-toggle auto-hide="false">
+            <ion-menu-toggle :auto-hide="false">
               <ion-item @click="btnMiPerfil()" lines="none" button>
                 <ion-icon :icon="personSharp"></ion-icon>
                 &nbsp; <ion-label>{{ $t('menuClientes.miPerfil') }}</ion-label>
@@ -36,8 +36,7 @@
             <ion-icon :icon="colorPalette"></ion-icon>
             &nbsp;
             <ion-label>{{ t('menuClientes.themeDark') }}</ion-label>
-            <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-            <ion-toggle :checked="isDark"
+            <ion-toggle :checked="isDark" slot="end"
               @ionChange="toggleDarkTheme(!isDark)" />
           </ion-item>
           <!-- IDIOMAS -->
@@ -65,7 +64,7 @@
           </ion-item>
           <template v-if="esAutenticado">
             <!-- CERRAR SESIÓN -->
-            <ion-menu-toggle auto-hide="false">
+            <ion-menu-toggle :auto-hide="false">
               <ion-item @click="modalCerrarSesion()" lines="none" button>
                 <ion-icon :icon="logOut"></ion-icon>
                 &nbsp; <ion-label>{{ $t('menuClientes.cerrarSesion') }}</ion-label>
@@ -119,26 +118,27 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed  } from 'vue'
-import { getCurrentInstance } from 'vue'
+// import { getCurrentInstance } from 'vue'
 import { 
-    IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, 
-    IonCol, IonItem, IonLabel, IonInput, IonSelect, IonSelectOption, IonButton, 
-    IonSpinner, IonModal, IonToggle, IonFab, IonFabButton, IonIcon, IonButtons, 
-    IonCheckbox, IonMenu, IonMenuToggle, IonMenuButton, IonSplitPane, IonList,
-    IonImg
+    IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, 
+    IonItem, IonLabel, IonSelect, IonSelectOption, IonButton, IonModal, 
+    IonToggle, IonIcon, IonMenu, IonMenuToggle, IonSplitPane,
+    IonList, IonImg
 } from '@ionic/vue'
-import { search, heart, logOut, languageOutline, colorPalette, personSharp  } from 'ionicons/icons'
-import { useRoute, useRouter } from 'vue-router'
+import { search, heart, logOut, /*languageOutline,*/ colorPalette, personSharp  } from 'ionicons/icons'
+import { /*useRoute,*/ useRouter } from 'vue-router'
 import { isAuthenticatedRef, updateAuthStatus } from '../stores/authStore'
 import { useI18n } from 'vue-i18n'
 
 // VARIABLES --------------------------------------------------------------------------------
   // ***********************
-  const app = getCurrentInstance()
+  // const app = getCurrentInstance()
   const { t, locale } = useI18n()
+  /*
   const $globalFunc = app?.appContext.config.globalProperties.$globalFunc
   const $api = app?.appContext.config.globalProperties.$api as string
-  const route = useRoute()
+  */
+  // const route = useRoute()
   const router = useRouter()
   const esAutenticado = computed(() => {
     return isAuthenticatedRef.value
@@ -146,13 +146,12 @@ import { useI18n } from 'vue-i18n'
   // // ***********************
   const isModalOpen = ref(false)
   const toggleButton = ref(false)
-  const idioma = ref('en')
+  // const idioma = ref('en')
   const paisSelec = ref({ valor: 'es', descripcion: 'Español', bandera: '/img/mexico.png' })
   const lstPaises = ref([
       { valor: 'es', nombre: 'Español', bandera: '/img/mexico.png' },
       { valor: 'en', nombre: 'English', bandera: '/img/usa.png' }
   ])
-  const interfaz = ref('')
   const isDark  = ref(true)
   // -----------------------------------------
   // FUNCIONES LOCALES

@@ -10,14 +10,14 @@
       <div v-if="status==='continuar'">
         <p>{{ t('miPerfil.preguntaEliminarCuenta') }}</p>
         <br>
-        <center>
+        <div class="centrar">
           <p>
             <ion-avatar>
-              <ion-img :src="avatarSrc" size="100px" />
+              <ion-img :src="avatarSrc ?? '/img/avatar.png'" size="100px" />
             </ion-avatar>
             {{ usuario }}
           </p>
-        </center>
+        </div>
         <!-- TEXTO SOLICITADO PARA ELIMINACIÓN -->
         <ion-text>
           {{ t('miPerfil.ingresatxt') }} [ {{ t('miPerfil.txtEliminarCuentaANDI') }} ] {{ t('miPerfil.paraProcederElim') }}
@@ -30,7 +30,7 @@
             @keyup.enter="valContinuarEliminar()"
             label-placement="stacked"
             :clear-on-edit="true"
-            maxlength="50"
+            :maxlength="50"
             :placeholder="t('miPerfil.txtEliminarCuentaANDI')"
             @input="txtEliminar = txtEliminar.toUpperCase()"
             fill="outline" >
@@ -50,15 +50,15 @@
       </div>
       <!-- BORRAR ----------------------------------------------------------- -->
       <div v-if="status==='borrar'">
-        <center>
+        <div class="centrar">
           <i class="far fa-envelope big-icon"></i>
           {{ correo }}
           <br>
           <!-- CODIGO PARA VALIDAR CORREO -->
-          <ion-input-otp length="6" shape="round" fill="outline"
+          <ion-input-otp :length="6" shape="round" fill="outline"
             v-model="codigoCorreo" />
           {{ t('miPerfil.ingresarCodigoCorreo') }}
-        </center>
+        </div>
         <br>
         <hr>
         <ion-button color="secondary" @click="regresar()">
@@ -76,7 +76,7 @@
       <div class="overlay-content">
         <ion-spinner color="secondary" name="lines"
           style="width: 3rem; height: 3rem;"></ion-spinner>
-        <p class="mt-3">{{ txtOverlaySpinner }}</p>
+        <p>{{ txtOverlaySpinner }}</p>
       </div>
     </div>
   </div>
@@ -85,19 +85,16 @@
 <script setup lang="ts">
   import { ref, onMounted } from 'vue'
   import { 
-    IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, 
-    IonItem, IonLabel, IonInput, IonSelect, IonSelectOption, IonButton, IonSpinner, 
-    IonModal, IonToggle, IonFab, IonFabButton, IonIcon, IonButtons, IonCheckbox, 
-    IonMenu, IonMenuButton, IonSplitPane, IonRange, IonList, IonText, IonAvatar,
-    IonImg, IonInputOtp, IonBackdrop
+    IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonInput, IonButton, 
+    IonSpinner, IonToggle, IonText, IonAvatar, IonImg, IonInputOtp, IonBackdrop
   } from '@ionic/vue'
   import { getCurrentInstance } from 'vue'
   import { useI18n } from 'vue-i18n'
   import axios from 'axios'
   import { useRouter } from 'vue-router'
-  import { isAuthenticatedRef, updateAuthStatus } from '../stores/authStore'
+  import { updateAuthStatus } from '../stores/authStore'
 
-  const { t, locale } = useI18n()
+  const { t } = useI18n()
 
   // VARIABLES ------------------------------
   // ***********************
@@ -107,12 +104,12 @@
   const router = useRouter()
   // // ***********************
   const status = ref('continuar')
-  const avatarSrc = ref('/img/avatar.png')
-  const usuario = ref('')
-  const idCliente = ref('')
-  const nomCliente = ref('')
-  const correo = ref('')
-  const idiomaSelec = ref({})
+  const avatarSrc = ref<string | null>(null)
+  const usuario = ref<string | null>(null)
+  const idCliente = ref<string | null>(null)
+  const nomCliente = ref<string | null>(null)
+  const correo = ref<string | null>(null)
+  const idiomaSelec = ref<string | null>(null)
   const toggleButton = ref(false)
   const txtEliminar = ref('')
   const mostrarOverlaySpinner = ref(false)
@@ -129,7 +126,7 @@
     nomCliente.value = localStorage.getItem('nombre')
     correo.value = localStorage.getItem('correoElectronico')
     idiomaSelec.value = localStorage.getItem('idiomaSelec')
-    avatarSrc.value = localStorage.getItem('urlImg')
+    avatarSrc.value = localStorage.getItem('urlImg') === '' ? '/img/avatar.png' : avatarSrc.value = localStorage.getItem('urlImg')
   })
   const regresar = () => {
     if (status.value === 'continuar') {
@@ -139,7 +136,7 @@
     }
   }
   const valContinuarEliminar = async () => {
-    if (!toggleButton) return
+    if (!toggleButton.value) return
     // TEXTO SOLICITADO PARA ELIMINACIÓN
     if (txtEliminar.value.trim() !== t('miPerfil.txtEliminarCuentaANDI')) {
       await $globalFunc.mostrarToast(
@@ -152,10 +149,10 @@
     mostrarOverlaySpinner.value = true
     txtOverlaySpinner.value = t('miPerfil.valSolicitud')
     console.log('encodeURIComponent(correo.value) ---')
-    console.log(encodeURIComponent(correo.value))
-    axios.put($api + '/Cliente/clienteCodigoCorreo?correo=' + encodeURIComponent(correo.value))
+    console.log(encodeURIComponent(correo.value ?? ''))
+    axios.put($api + '/Cliente/clienteCodigoCorreo?correo=' + encodeURIComponent(correo.value ?? ''))
       .then(async function (response) {
-        let resp = response.data
+        const resp = response.data
         console.log('resp ---')
         console.log(resp)
         status.value = 'borrar'
@@ -200,13 +197,13 @@
       return
     }
     console.log('encodeURIComponent(correo.value) ---')
-    console.log(encodeURIComponent(correo.value))
+    console.log(encodeURIComponent(correo.value ?? ''))
     console.log('codigo ---')
     console.log(codigo)
     // SIN ERRORES ========================
-    axios.post($api + '/Cliente/borrarCuentaANDI?correo=' + encodeURIComponent(correo.value) + '&codigo=' + codigo)
+    axios.post($api + '/Cliente/borrarCuentaANDI?correo=' + encodeURIComponent(correo.value ?? '') + '&codigo=' + codigo)
       .then(async function (response) {
-        let cliente = response.data
+        const cliente = response.data
         if (cliente.correoElectronico === null) {
           mostrarOverlaySpinner.value = false
           await $globalFunc.mostrarToast(

@@ -41,23 +41,8 @@ const router = createRouter({
 })
 
 // 🚀 APLICAR LA VERIFICACIÓN DE AUTENTICACIÓN GLOBALMENTE
-/*
 router.beforeEach((to) => {
-  let usuario = localStorage.getItem('usuario')
-  if (usuario === null || usuario === '' || usuario === 'null') {
-    usuario = ''
-  }
-  const rutasPublicas = ['/login']
-  if (!rutasPublicas.includes(to.path) && (usuario === '')) {
-    return { path: '/login', replace: true }
-  } else {
-  }
-  return true
-})
-*/
-// 🚀 APLICAR LA VERIFICACIÓN DE AUTENTICACIÓN GLOBALMENTE
-router.beforeEach((to) => {
-  let usuario = localStorage.getItem('usuario')
+  const usuario = localStorage.getItem('usuario')
   const isAuthenticated = !(usuario === null || usuario === '' || usuario === 'null')
   // La única ruta pública "de la app" es /app/Login
   const isLoginRoute = to.path === '/app/Login' 
