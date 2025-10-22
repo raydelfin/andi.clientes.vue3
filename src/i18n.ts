@@ -1,8 +1,8 @@
 import { createI18n, type I18n } from 'vue-i18n'
 
 // Importación estática desde /src
-import messagesEs from './idiomas/esp.json'
-import messagesEn from './idiomas/ing.json'
+import messagesEs from  './shared/idiomas/esp.json'
+import messagesEn from './shared/idiomas/ing.json'
 
 /// Crear instancia con los mensajes cargados estáticamente
 export const i18n = createI18n({

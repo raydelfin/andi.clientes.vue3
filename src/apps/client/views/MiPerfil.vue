@@ -5,6 +5,9 @@
         <ion-buttons>
           <ion-menu-button></ion-menu-button>
           <ion-title>{{ t('menuClientes.miPerfil') }}</ion-title>
+          <ion-avatar class="avatar-right">
+            <ion-img :src="avatarSrc" size="60px" />
+          </ion-avatar>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
@@ -68,7 +71,8 @@
             label-placement="stacked"
             v-model="formatoFechaSelec"
             :disabled=esConsulta
-            fill="outline" >
+            fill="outline"
+            mode="md" >
             <ion-select-option v-for="formato in lstFormatoFecha"
               :key="formato.nombre" :value="formato">
               {{ formato.nombre }}
@@ -82,7 +86,8 @@
             label-placement="stacked"
             v-model="formatoHoraSelec"
             :disabled=esConsulta
-            fill="outline" >
+            fill="outline"
+            mode="md" >
             <ion-select-option v-for="formato in lstFormatoHora"
               :key="formato.nombre" :value="formato">
               {{ formato.nombre }}
@@ -96,7 +101,8 @@
             label-placement="stacked"
             v-model="zonaHorariaSelec"
             :disabled=esConsulta
-            fill="outline" >
+            fill="outline"
+            mode="md" >
             <ion-select-option v-for="zona in lstZonaHoraria"
               :key="zona.zonaHoraria" :value="zona">
               {{ zona.zonaHoraria }}
@@ -110,7 +116,8 @@
             label-placement="stacked"
             v-model="metodosPagoSelec"
             :disabled=esConsulta
-            fill="outline" >
+            fill="outline"
+            mode="md" >
             <ion-select-option v-for="pago in lstMetodosPago"
               :key="pago.nombre" :value="pago">
               {{ pago.nombre }}
@@ -124,7 +131,8 @@
             label-placement="stacked"
             v-model="divisaSelec"
             :disabled=esConsulta
-            fill="outline" >
+            fill="outline"
+            mode="md" >
             <ion-select-option v-for="divisas in lstDivisas"
               :key="divisas.nombreLargo" :value="divisas">
               {{ divisas.nombreLargo }}
@@ -139,7 +147,8 @@
               v-model="distanciaEnSelec"
               :disabled=esConsulta
               @ionChange="cambioDistancia()"
-              fill="outline" >
+              fill="outline"
+              mode="md" >
               <ion-select-option v-for="distancia in lstDistanciaEn"
                 :key="distancia.nombre" :value="distancia">
                 {{ distancia.nombre }}
@@ -233,7 +242,8 @@
           :maxlength="50"
           :placeholder="t('miPerfil.txtEliminarCuentaANDI')"
           @input="txtEliminar = txtEliminar.toUpperCase()"
-          fill="outline" >
+          fill="outline"
+          mode="md" >
         </ion-input>
       </ion-item>
       <ion-item>
@@ -264,7 +274,7 @@
         <br>
         <!-- CODIGO PARA VALIDAR CORREO -->
         <!-- <ctrlCodigoSMS @codigo-completo="recibirCodigoCorreo" /> -->
-        <ion-input-otp :length="6" shape="round" fill="outline"
+        <ion-input-otp :length="6" shape="round" fill="outline" mode="md"
           v-model="codigoCorreo">
           {{ t('miPerfil.ingresarCodigoCorreo') }} </ion-input-otp>
       </div>
@@ -716,7 +726,7 @@
           let num = 1
           localStorage.setItem('cuentaANDIEliminada', num.toString())
           localStorage.setItem('busqueda', null)
-          router.replace('/app/Login')
+          router.replace('/client/Login')
           location.reload()
         }
       })
@@ -726,6 +736,6 @@
     */
   }
   const BorrarCuenta = () => {
-    router.push('/app/BorrarCuenta')
+    router.push('/client/BorrarCuenta')
   }
 </script>

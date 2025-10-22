@@ -8,56 +8,97 @@
     <ion-content :fullscreen="true" class="ion-padding">
       <!-- CONTINUAR -------------------------------------------------------- -->
       <div v-if="status==='continuar'">
-        <p>{{ t('miPerfil.preguntaEliminarCuenta') }}</p>
-        <br>
-        <div class="centrar">
-          <p>
-            <ion-avatar>
-              <ion-img :src="avatarSrc ?? '/img/avatar.png'" size="100px" />
-            </ion-avatar>
-            {{ usuario }}
-          </p>
-        </div>
-        <!-- TEXTO SOLICITADO PARA ELIMINACIÓN -->
-        <ion-text>
-          {{ t('miPerfil.ingresatxt') }} [ {{ t('miPerfil.txtEliminarCuentaANDI') }} ] {{ t('miPerfil.paraProcederElim') }}
-        </ion-text>
-        <!-- Usuario ANDI -->
-        <ion-item>
-          <ion-input
-            :label="t('miPerfil.escribeFrase')"
-            v-model.trim="txtEliminar"
-            @keyup.enter="valContinuarEliminar()"
-            label-placement="stacked"
-            :clear-on-edit="true"
-            :maxlength="50"
-            :placeholder="t('miPerfil.txtEliminarCuentaANDI')"
-            @input="txtEliminar = txtEliminar.toUpperCase()"
-            fill="outline" >
-          </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-toggle v-model="toggleButton" label-placement="end" >
-          {{ t('miPerfil.siQuieroEliminarCuenta') }} </ion-toggle>
-        </ion-item>
-        <br>
-        <hr>
-        <ion-button color="secondary" @click="regresar()">
-          {{ t('global.no') }}</ion-button>
-        <ion-button color="danger"
-          :disabled='!toggleButton'
-          @click="valContinuarEliminar()">{{ t('miPerfil.continuarEliminacion') }}</ion-button>
+        <ion-grid>
+          <!-- CODIGO PARA VALIDAR CORREO -->
+          <ion-row>
+            <ion-col>
+              {{ t('miPerfil.ingresarCodigoCorreo') }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <p>{{ t('miPerfil.preguntaEliminarCuenta') }}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="centrar">
+                <ion-avatar>
+                  <ion-img :src="avatarSrc ?? '/img/avatar.png'" style="width: 85px; height: 85px; left: -12px; position: relative;" />
+                </ion-avatar>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="centrar" style="padding-top: 10px;">
+              {{ usuario }}
+            </ion-col>
+          </ion-row>
+          <!-- TEXTO SOLICITADO PARA ELIMINACIÓN -->
+          <ion-row>
+            <ion-col>
+              {{ t('miPerfil.ingresatxt') }} [ {{ t('miPerfil.txtEliminarCuentaANDI') }} ] {{ t('miPerfil.paraProcederElim') }}
+            </ion-col>
+          </ion-row>
+          <!-- Usuario ANDI -->
+          <ion-row>
+            <ion-col>
+              <ion-input
+                :label="t('miPerfil.escribeFrase')"
+                v-model.trim="txtEliminar"
+                @keyup.enter="valContinuarEliminar()"
+                label-placement="stacked"
+                :clear-on-edit="true"
+                :maxlength="50"
+                :placeholder="t('miPerfil.txtEliminarCuentaANDI')"
+                @input="txtEliminar = txtEliminar.toUpperCase()"
+                fill="outline"
+                mode="md" >
+              </ion-input>    
+            </ion-col>
+          </ion-row>
+          <!-- Checkbox si quiero eliminar -->
+          <ion-row>
+            <ion-col>
+              <ion-toggle v-model="toggleButton" label-placement="end" >
+                {{ t('miPerfil.siQuieroEliminarCuenta') }} </ion-toggle>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-button color="secondary" @click="regresar()">
+                {{ t('global.no') }}</ion-button>
+              <ion-button color="danger"
+                :disabled='!toggleButton'
+                @click="valContinuarEliminar()">{{ t('miPerfil.continuarEliminacion') }}</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
       <!-- BORRAR ----------------------------------------------------------- -->
       <div v-if="status==='borrar'">
         <div class="centrar">
-          <i class="far fa-envelope big-icon"></i>
-          {{ correo }}
-          <br>
-          <!-- CODIGO PARA VALIDAR CORREO -->
-          <ion-input-otp :length="6" shape="round" fill="outline"
-            v-model="codigoCorreo" />
-          {{ t('miPerfil.ingresarCodigoCorreo') }}
+          <ion-grid>
+            <!-- CORREO -->
+            <ion-row>
+              <ion-col class="centrar">
+                <i class="far fa-envelope big-icon"></i>
+                {{ correo }}
+              </ion-col>
+            </ion-row>
+            <!-- CODIGO PARA VALIDAR CORREO -->
+            <ion-row>
+              <ion-col>
+                <ion-input-otp :length="4" shape="round" size="small"
+                v-model="codigoCorreo" />
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                {{ t('miPerfil.ingresarCodigoCorreo') }}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </div>
         <br>
         <hr>
@@ -92,7 +133,7 @@
   import { useI18n } from 'vue-i18n'
   import axios from 'axios'
   import { useRouter } from 'vue-router'
-  import { updateAuthStatus } from '../stores/authStore'
+  import { updateAuthStatus } from '../../../shared/stores/authStore'
 
   const { t } = useI18n()
 
@@ -130,7 +171,7 @@
   })
   const regresar = () => {
     if (status.value === 'continuar') {
-      router.replace('/app/MiPerfil');
+      router.replace('/client/MiPerfil');
     } else {
       status.value = 'continuar'
     }
@@ -251,6 +292,6 @@
     localStorage.setItem('tipoLogin', '')
     localStorage.setItem('valorLogin', '')
     updateAuthStatus(false)
-    router.push('/app/Login')
+    router.push('/client/Login')
   }
 </script>

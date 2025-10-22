@@ -27,7 +27,8 @@
             :label="$t('login.loginPor')"
             v-model="tipoLoginSelec"
             @ionChange="cambioTipoLogin()"
-            fill="outline" >
+            fill="outline"
+            mode="md" >
             <ion-select-option v-for="login in lstTipoLogin"
               :key="login.nombre" :value="login">
               {{ login.nombre }}
@@ -44,7 +45,8 @@
             :maxlength="30"
             :placeholder="$t('login.ingresaUsuario')"
             @input="credenciales.usuario = credenciales.usuario.toUpperCase()"
-            fill="outline" >
+            fill="outline"
+            mode="md" >
           </ion-input>
         </ion-item>
         <!-- Contraseña -->
@@ -58,8 +60,10 @@
             :clear-on-edit="true"
             :maxlength="30"
             :placeholder="t('login.ingresaContraseña')"
-            fill="outline" >
-            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+            fill="outline"
+            mode="md" >
+              <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
+              <ion-input-password-toggle slot="end"></ion-input-password-toggle>
           </ion-input>
         </ion-item>
       </ion-list>
@@ -93,7 +97,7 @@
   // import { i18n, t } from '../i18n'
   // import mensajesEs from '../idiomas/esp.json'
   import { useI18n } from 'vue-i18n'
-  import { useTranslations } from '../composables/useTranslations';
+  import { useTranslations } from '../../../shared/composables/useTranslations';
   import { ref, onMounted } from 'vue'
   import { 
     IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, 
@@ -104,7 +108,7 @@
   import { getCurrentInstance } from 'vue'
   import axios from 'axios'
   import { useRouter } from 'vue-router'
-  import { /*isAuthenticatedRef,*/ updateAuthStatus } from '../stores/authStore'
+  import { /*isAuthenticatedRef,*/ updateAuthStatus } from '../../../shared/stores/authStore'
     
   // VARIABLES --------------------------------------------------------------------------------
   // **********************************************
@@ -139,19 +143,11 @@
   // const dismissSecs = ref(10)
   const lat = ref(0)
   const lon = ref(0)
+  const ubicacion = ref('')
   // FUNCIONES LOCALES --------------------------------------------------------------------------
   // Lógica de mounted()
   onMounted(() => {
     listaLogin()
-    let usuario = localStorage.getItem('usuario')
-    if (usuario === null || usuario === '' || usuario === 'null') {
-      usuario = ''
-      localStorage.setItem('usuario', '')
-      updateAuthStatus(false)
-    } else {
-      updateAuthStatus(true)
-      router.replace('/app/Buscar')
-    }
   })
   const listaLogin = () => {
     // 💡 PARA ACTUALIZAR UN ref(), USA .value
@@ -164,14 +160,6 @@
       tipoLoginSelec.value = lstTipoLogin.value[0]!
     }
   }
-  /*
-  const cambiarIdioma = (nuevoLocale) => {
-    // Cuando usas 'locale' desde useI18n, es una referencia reactiva (ref), 
-    // por lo que debes usar .value para cambiar su valor.
-    locale.value = nuevoLocale
-    console.log(`Idioma cambiado a: ${locale.value}`)
-  }
-  */
   const cambioTipoLogin = () => {
     console.log('cambioTipoLogin() ---')
     console.log('tipoLoginSelec ---')
@@ -184,21 +172,8 @@
       }
     }
   }
-  /*
-  const scrollToTop = async () => {
-    const content = document.querySelector('ion-content');
-    if (content) {
-      await content.scrollToTop(500);
-    }
-  }
-  const modalQuitarCuenta = (u) => {
-    // Asegúrate de definir 'usuarioSelec' si la usas
-    // this.usuarioSelec = u; 
-    isModalEliminarCuentaOpen.value = true
-  }
-  */
   const validarLogin = async () => {
-    // console.log('localStorage.getItem(usuario) ---')
+    console.log('validarLogin() ---')
     // console.log(localStorage.getItem('usuario'))
     mostrarOverlaySpinner.value = true
     txtOverlaySpinner.value = t('login.valCredenciales')
@@ -218,8 +193,7 @@
         await $globalFunc.mostrarToast(
           t('login.ingresaUsuario'),
           t('global.validacion'),
-          5000,
-          'warning')
+          5000, 'warning')
         mostrarOverlaySpinner.value = false
         return
       }
@@ -230,8 +204,7 @@
         await $globalFunc.mostrarToast(
           t('login.ingresarCorreo'),
           t('global.validacion'),
-          5000,
-          'warning')
+          5000, 'warning')
         mostrarOverlaySpinner.value = false
         return
       }
@@ -280,8 +253,7 @@
       await $globalFunc.mostrarToast(
         t('login.ingresaContraseña'),
         t('global.validacion'),
-        5000,
-        'warning')
+        5000, 'warning')
       mostrarOverlaySpinner.value = false
       return
     }
@@ -307,29 +279,42 @@
     }
     console.log('obj ---')
     console.log(obj)
+    console.log('$api ---')
+    console.log($api)
+    // 💡 Uso de async/await para una sintaxis más limpia
     try {
-      // 💡 Uso de async/await para una sintaxis más limpia
-      const response = await axios.post(
-        $api + '/Cliente/LoginCliente', obj)
-      console.log('AXIOS OK /Cliente/LoginCliente ---')
-      console.log('response ---')
-      console.log(response)
+      const response = await axios.post($api + '/Cliente/LoginCliente', obj, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        timeout: 10000 // 10 segundos timeout
+      })
+      console.log('Response status:', response.status)
+      console.log('Response data:', response.data)
+      /*
+      axios.post($api + '/Cliente/LoginCliente', obj)
+        .then(async function (response) {
+      */
       if (response.data.usuario === null) {
         await $globalFunc.mostrarToast(
           t('login.passIncorrecto'),
           t('global.validacion'),
-          5000,
-          'warning')
+          5000, 'warning')
         mostrarOverlaySpinner.value = false
       } else {
         if ('geolocation' in navigator) {
           navigator.geolocation.getCurrentPosition(
             (position) => {
-              console.log('position GPS ---')
-              console.log(position)
+              // console.log('position GPS ---')
+              // console.log(position)
+              const ubicacion = position.coords
+              // console.log('self.ubicacion: ' + self.ubicacion)
               lat.value = position.coords.latitude
               lon.value = position.coords.longitude
               guardarUbicacion()
+              // console.log('Login Cliente ---')
+              // console.log(response.data)
               localStorage.setItem('idCliente', response.data.idCliente)
               localStorage.setItem('nombre', response.data.nombre)
               localStorage.setItem('formatoFecha', response.data.formatoFecha)
@@ -343,15 +328,14 @@
               localStorage.setItem('correoElectronico', response.data.correoElectronico)
               localStorage.setItem('colorTema', response.data.colorTema)
               localStorage.setItem('idiomaSelec', response.data.idioma)
-              localStorage.setItem('latitud', position.coords.latitude.toString())
-              localStorage.setItem('longitud', position.coords.longitude.toString())
-              // localStorage.setItem('ubicacion', ubicacion)
+              localStorage.setItem('latitud', lat.value.toString())
+              localStorage.setItem('longitud', lon.value.toString())
               localStorage.setItem('cel', response.data.telefono)
               localStorage.setItem('lada', response.data.lada)
               localStorage.setItem('firebaseUid', response.data.firebaseUid)
               localStorage.setItem('customToken', response.data.customToken)
               if (response.data.urlImg === '') {
-                localStorage.setItem('urlImg', '/img/avatar.png')
+                localStorage.setItem('urlImg', '/img/avatars/1.png')
               } else {
                 localStorage.setItem('urlImg', response.data.urlImg)
               }
@@ -370,16 +354,14 @@
                 tipo = 'telefono'
                 valor = response.data.telefono
               }
-              localStorage.setItem('tipoLogin', tipo)
+              localStorage.setItem('tipoLogin', tipo.toString())
               localStorage.setItem('valorLogin', valor)
-              updateAuthStatus(true)
-              router.replace('/app/Buscar')
-              mostrarOverlaySpinner.value = false
+              router.push('/client/Buscar')
             },
             (error) => {
-              console.log('Error 1: ', error)
+              console.log('Error 1')
               mostrarOverlaySpinner.value = false
-              // error.value = 'Error al obtener ubicación: ' + error.message
+              console.log('Error al obtener ubicación: ' + error.message)
             }
             // { enableHighAccuracy: true } // Opcional, para mejor precisión
           )
@@ -387,20 +369,15 @@
           mostrarOverlaySpinner.value = false
           console.log('Error 2')
         }
+        /*
+        if (ubicacion.value === null) {
+          dismissCountDown = dismissSecs
+        }
+        */
       }
-    } catch (err) {
-      // Lógica que estaba en .catch(function (error) { ...
-      if (axios.isAxiosError(err) && err.response) {
-        // Error de la respuesta (ej. 400, 500)
-        err = err.response.data.message || 'Error de servidor';
-      } else {
-        // Otros errores (ej. de red)
-        err = 'No se pudo conectar al servidor.';
-      }
-      console.error('Error durante el login:', err);
-      
-    } finally {
-      // isLoading.value = false;
+    } catch (error) {
+      mostrarOverlaySpinner.value = false
+      console.log('Error completo:', error)
     }
   }
   const guardarUbicacion = () => {
@@ -409,6 +386,6 @@
       longitud: lon.value
     }))
   }
-    // ===========================================================================
-    // ===========================================================================
+  // ===========================================================================
+  // ===========================================================================
 </script>

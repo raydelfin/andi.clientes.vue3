@@ -30,12 +30,20 @@
                 &nbsp; <ion-label>{{ $t('menuClientes.miPerfil') }}</ion-label>
               </ion-item>
             </ion-menu-toggle>
+            <!-- DIRECCIONES -->
+            <ion-menu-toggle :auto-hide="false">
+              <ion-item @click="btnDirecciones()" lines="none" button>
+                <ion-icon :icon="location"></ion-icon>
+                &nbsp; <ion-label>{{ $t('menuClientes.direcciones') }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
           </template>
           <!-- TEMA DARK Y LIGHT -->
           <ion-item lines="none">
             <ion-icon :icon="colorPalette"></ion-icon>
             &nbsp;
             <ion-label>{{ t('menuClientes.themeDark') }}</ion-label>
+            <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
             <ion-toggle :checked="isDark" slot="end"
               @ionChange="toggleDarkTheme(!isDark)" />
           </ion-item>
@@ -117,33 +125,35 @@
 </template>
 
 <script setup lang="ts">
+import axios from 'axios'
 import { ref, onMounted, computed  } from 'vue'
-// import { getCurrentInstance } from 'vue'
+import { getCurrentInstance } from 'vue'
 import { 
     IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, 
     IonItem, IonLabel, IonSelect, IonSelectOption, IonButton, IonModal, 
-    IonToggle, IonIcon, IonMenu, IonMenuToggle, IonSplitPane,
-    IonList, IonImg
+    IonToggle, IonIcon, IonMenu, IonMenuToggle, IonSplitPane, IonList, IonImg
 } from '@ionic/vue'
-import { search, heart, logOut, /*languageOutline,*/ colorPalette, personSharp  } from 'ionicons/icons'
+import { search, heart, logOut, colorPalette, personSharp, location  } from 'ionicons/icons'
 import { /*useRoute,*/ useRouter } from 'vue-router'
-import { isAuthenticatedRef, updateAuthStatus } from '../stores/authStore'
+import { isAuthenticatedRef, updateAuthStatus } from '../../../shared/stores/authStore'
 import { useI18n } from 'vue-i18n'
 
 // VARIABLES --------------------------------------------------------------------------------
   // ***********************
-  // const app = getCurrentInstance()
+  const app = getCurrentInstance()
+  const $globalFunc = app?.appContext.config.globalProperties.$globalFunc
   const { t, locale } = useI18n()
   /*
   const $globalFunc = app?.appContext.config.globalProperties.$globalFunc
-  const $api = app?.appContext.config.globalProperties.$api as string
   */
+  const $api = app?.appContext.config.globalProperties.$api as string
   // const route = useRoute()
   const router = useRouter()
   const esAutenticado = computed(() => {
     return isAuthenticatedRef.value
   })
   // // ***********************
+  const avatarSrc = ref('/img/avatar.png')
   const isModalOpen = ref(false)
   const toggleButton = ref(false)
   // const idioma = ref('en')
@@ -168,15 +178,26 @@ import { useI18n } from 'vue-i18n'
       initialThemeIsDark = window.matchMedia('(prefers-color-scheme: dark)').matches
     }
     toggleDarkTheme(initialThemeIsDark)
+    // Validacion cuando viene del index.ts
+    let iniciada = localStorage.getItem('appIniciada')
+    console.log('appIniciada: ', iniciada)
+    if (iniciada === '1') {
+      localStorage.setItem('appIniciada', '0')
+      // Actualizar img del usuario
+      cargarImgPerfil()
+    }
   })
   const btnBuscar = () => {
-    router.push('/app/Buscar')
+    router.push('/client/Buscar')
   }
   const btnFavoritos = () => {
-    router.push('/app/Favoritos')
+    router.push('/client/Favoritos')
   }
   const btnMiPerfil = () => {
-    router.push('/app/MiPerfil')
+    router.push('/client/MiPerfil')
+  }
+  const btnDirecciones = () => {
+    router.push('/client/ListaDirecciones')
   }
   const toggleDarkTheme = (shouldAdd: boolean) => {
     // Aplicar o remover la clase 'dark' en el body
@@ -229,6 +250,32 @@ import { useI18n } from 'vue-i18n'
     localStorage.setItem('valorLogin', '')
     isModalOpen.value = false
     updateAuthStatus(false)
-    router.replace('/app/Login')
+    router.replace('/client/Login')
+  }
+  const cargarImgPerfil = async () => {
+    // console.log('cargarImgPerfil() ---')
+    let idCliente = localStorage.getItem('idCliente')
+    // console.log('idCliente: ', idCliente)
+    const lstClientes = [ idCliente ]
+    // console.log('lstClientes: ', lstClientes)
+    try {
+      const response = await axios.post($api + '/Cliente/ObtenerImagenPerfiles', lstClientes, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        timeout: 10000 // 10 segundos timeout
+      })
+      // console.log('Response status:', response.status)
+      // console.log('Response data:', response.data)
+      // console.log('urlImagen: ', response.data[0].urlImagen)
+      if (response.data.urlImagen === '') {
+        localStorage.setItem('urlImg', '/img/avatars/1.png')
+      } else {
+        localStorage.setItem('urlImg', response.data[0].urlImagen)
+      }
+    } catch (error) {
+      console.log('Error completo:', error)
+    }
   }
 </script>

@@ -71,7 +71,8 @@
     "paypal": "PayPal",
     "mercadoPago": "Mercado Pago",
     "oxxo": "OXXO",
-    "deposito": "Bank deposit"
+    "deposito": "Bank deposit",
+    "aceptar": "Accept"
   },
   "agenda": {
       "titulo": "Scheduler",

@@ -2,9 +2,9 @@ import { IonicVue } from '@ionic/vue'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import './style.scss'
-import funcionesGlobales from './composables/useFuncionesGlobales'
+import funcionesGlobales from './shared/composables/useFuncionesGlobales'
 import App from './App.vue'
-import router from './router'
+import router from '../src/apps/client/router'
 import { i18n } from './i18n'
 
 import '@ionic/vue/css/core.css'
@@ -30,7 +30,8 @@ app.use(i18n)
 // Configuración global SIN async
 app.config.globalProperties.$t = i18n.global.t
 app.config.globalProperties.$globalFunc = funcionesGlobales
-app.config.globalProperties.$api = 'https://api.andi.services/api'
+// app.config.globalProperties.$api = 'https://localhost:44314/api' // Pruebas locales
+app.config.globalProperties.$api = 'https://api.andi.services/api' // Desarrollo
 /*
 console.log('🔍 Verificando i18n en main.ts:')
 console.log('Locale:', i18n.global.locale.value)
