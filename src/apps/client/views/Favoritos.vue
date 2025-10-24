@@ -53,7 +53,5 @@
   // FUNCIONES LOCALES
   // Lógica de mounted()
   onMounted(() => {
-    localStorage.setItem('interfaz', 'Buscar')
-    console.log('Buscar.vue ---')
   })
 </script>

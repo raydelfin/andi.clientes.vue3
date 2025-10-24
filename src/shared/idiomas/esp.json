@@ -286,10 +286,11 @@
     "preguntaEliminarDir": "¿Deseas ELIMINAR la Dirección Seleccionada?",
     "dirEliminada": "Dirección ELIMINADA Exitosamente!",
     "errorEliminada": "Error al eliminar la Dirección",
-    "notaIndicaciones": "Maximo 300 caracteres",
+    "notaIndicaciones": "Máximo 300 caracteres",
     "nomUbicacion": "Nombre ubicación",
     "ingresarNomUbicacion": "Ingresa el Nombre Ubicación",
-    "dirSelec": "Dirección seleccionada"
+    "dirSelec": "Dirección seleccionada",
+    "cargandoDirecciones": "Cargando Direcciones ..."
   },
   "favoritos": {
     "titulo": "Favoritas",
@@ -355,6 +356,8 @@
     "agenda": "Agenda / Historial",
     "miPerfil": "Mi Perfil",
     "direcciones": "Direcciones",
+    "direccion": "Dirección",
+    "listaDirecciones": "Lista de Direcciones",
     "iniciaSesion": "Inicia sesión",
     "cerrarSesion": "Cerrar Sesión",
     "themeDark": "Tema Oscuro",

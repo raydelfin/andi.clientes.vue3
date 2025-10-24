@@ -11,7 +11,7 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content :fullscreen="true" class="ion-padding">
+    <ion-content :fullscreen="true" class="ion-padding" ref="contentElement">
       <!-- AVATAR Y DATOS CLIENTE -->
       <ion-grid>
         <ion-row>
@@ -207,6 +207,15 @@
         <i class="fas fa-edit big-icon"></i> &nbsp;
         {{ t('miPerfil.eliminarCuenta') }} </ion-button>
     </ion-content>
+
+    <!-- BOTON SCROLL ARRIBA -->
+    <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
+    <ion-fab slot="fixed" vertical="bottom" horizontal="left" class="back-to-top">
+      <ion-fab-button @click="scrollToTop">
+        <ion-icon :icon="chevronUpOutline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
   </ion-page>
 
   <!-- MODAL CONTINUAR ELIMINAR CUENTA --------------------------------------- -->
@@ -306,8 +315,9 @@
     IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, 
     IonItem, IonInput, IonSelect, IonSelectOption, IonButton, IonSpinner, 
     IonModal, IonToggle, IonButtons, IonMenuButton, IonList, IonText, IonAvatar,
-    IonImg, IonInputOtp, IonBackdrop, IonBadge
+    IonImg, IonInputOtp, IonBackdrop, IonBadge, IonIcon, IonFabButton, IonFab
   } from '@ionic/vue'
+  import { chevronBackOutline, chevronUpOutline  } from 'ionicons/icons'
   import { getCurrentInstance } from 'vue'
   import { useI18n } from 'vue-i18n'
   import axios from 'axios'
@@ -321,7 +331,9 @@
   const $globalFunc = app?.appContext.config.globalProperties.$globalFunc
   const $api = app?.appContext.config.globalProperties.$api as string
   const router = useRouter()
-  // // ***********************
+  // ***************************************************************************
+  // ***************************************************************************
+  const contentElement = ref<any>(null)
   const avatarSrc = ref('/img/avatar.png')
   const secPerfil = ref('')
   const estatus = ref('')
@@ -379,7 +391,6 @@
   // FUNCIONES LOCALES
   // Lógica de mounted()
   onMounted(() => {
-    localStorage.setItem('interfaz', 'MiPerfil')
     secPerfil.value = 'MENU'
     estatus.value = 'CONSULTA'
     esConsulta.value = true
@@ -737,5 +748,12 @@
   }
   const BorrarCuenta = () => {
     router.push('/client/BorrarCuenta')
+  }
+  const scrollToTop = () => {
+    if (contentElement.value && $globalFunc) {
+      $globalFunc.scrollToTop(contentElement.value)
+    } else {
+      console.error("No se pudo llamar a scrollToTop. contentElement o $globalFunc es nulo.")
+    }
   }
 </script>

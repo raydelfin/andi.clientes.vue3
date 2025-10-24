@@ -352,6 +352,8 @@
     "agenda": "Scheduler",
     "miPerfil": "My profile",
     "direcciones": "Addresses",
+    "direccion": "Address",
+    "listaDirecciones": "Address List",
     "iniciaSesion": "Log In",
     "cerrarSesion": "Log Out",
     "themeDark": "Dark Theme",
